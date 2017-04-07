@@ -197,6 +197,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"</Comm
   <ItemGroup>
     <ClInclude Include="cuda_tools.cuh" />
     <ClInclude Include="filters.cuh" />
+    <ClInclude Include="GeneratedFiles\ui_gl_window.h" />
     <ClInclude Include="tools.hh" />
     <CustomBuild Include="gui_gl_widget.hh">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>

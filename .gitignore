@@ -175,6 +175,9 @@ $RECYCLE.BIN/
 # Doxygen
 doc/*
 
+# avoid to include generated files
+CREPE/GeneratedFiles/
+
 # Pictures
 *.raw
 *.avi

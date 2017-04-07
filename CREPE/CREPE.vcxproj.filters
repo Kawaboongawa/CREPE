@@ -74,6 +74,9 @@
     <ClInclude Include="filters.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_gl_window.h">
+      <Filter>C++ Header Files\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui_gl_widget.hh">

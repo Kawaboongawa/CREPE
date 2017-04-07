@@ -34,8 +34,7 @@ namespace gui
 		**
 		** Build the widget and start a display QTimer.
 		**
-		** \param h holovibes object
-		** \param q Queue containing the frames to display
+		** \param void* frame containing the displayed screen in RGB format
 		** \param width widget's width
 		** \param height widget's height
 		** \param parent Qt parent (should be a GUIGlWindow)
@@ -74,29 +73,6 @@ namespace gui
 		** with common boilerplate code.
 		*/
 		void paintGL() override;
-
-		/*! \brief Starts selection
-		**
-		** Whenever mouse is pressed, the selection rectangle top left corner is
-		** defined at the current coordinates. If the zoom mode is active and right
-		** mous button is pressed then dezoom occured.
-		*/
-		void mousePressEvent(QMouseEvent* e) override;
-
-		/*! \brief Change selection rectangle bottom right corner */
-		void mouseMoveEvent(QMouseEvent* e) override;
-
-		/*! \brief Ends selection
-		**
-		** Whenever mouse is released, selection bottom right corner is set to current
-		** mouse coordinates then a bound check is done then a swap of corners if necessary.
-		**
-		** In AUTOFOCUS mode, a signal is sent to the main window to inform that selection is
-		** done.
-		** In AVERAGE mode, it is alternatively signal and zone selection that are set.
-		** In ZOOM mode, its check that the selection is not a point.
-		*/
-		void mouseReleaseEvent(QMouseEvent* e) override;
 
 	protected:
 		QWidget* parent_;

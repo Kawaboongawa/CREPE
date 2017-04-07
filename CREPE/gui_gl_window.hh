@@ -42,7 +42,7 @@ namespace gui
 		~GuiGLWindow();
 
 		/*! \brief Call when windows is resize */
-		void resizeEvent(QResizeEvent* e) override;
+	//	void resizeEvent(QResizeEvent* e) override;
 
 		/*! \brief Returns a reference to a GLWidget object. */
 		GLWidget& get_gl_widget() const
@@ -50,23 +50,12 @@ namespace gui
 			return *gl_widget_;
 		}
 
-		public slots:
-		/*! \brief Set window to fullscreen mode */
-		void full_screen();
-		/*! \brief Set window to the maximum dimension of the screen */
-		void maximized_screen();
-		/*! \brief Set window back to normal default mode */
-		void default_screen();
-		
 	private:
 		Ui::GLWindow ui;
+
 		/*! GL widget, it updates itself */
 		std::unique_ptr<GLWidget> gl_widget_;
 
-		/*! \{ \name Screen modes keyboard shortcuts */
-		QShortcut* full_screen_;
-		QShortcut* maximized_screen_;
-		QShortcut* default_screen_;
-		/*! \} */
+
 	};
 }

@@ -27,7 +27,6 @@ namespace gui
 		if (cudaStreamCreate(&cuda_stream_) != cudaSuccess)
 			cuda_stream_ = 0; // Use default stream as a fallback
 
-		setMouseTracking(true);
 	}
 
 	GLWidget::~GLWidget()
@@ -106,26 +105,8 @@ namespace gui
 		* This affects glTexImage2D command. */
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffer_);
 
-		//if (frame_desc_.endianness == camera::BIG_ENDIAN)
-		//	glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_TRUE);
-		//else
-		//glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_FALSE);
-		
-		// in case debbugging is needed
-		
-		/*void * res = malloc(50);
-		cudaMemcpy(res, buffer_ptr, 50, cudaMemcpyDeviceToHost);
-		unsigned char * resc = (unsigned char *)res;
-		unsigned char r = resc[12];
-		unsigned char g = resc[13];
-		unsigned char b = resc[14];
-		free(res);*/
-
-
 		auto depth = GL_UNSIGNED_BYTE;
 		auto kind = GL_RGB;
-		//auto kind = GL_RED;
-		//auto depth = GL_UNSIGNED_BYTE;
 
 		glTexImage2D(GL_TEXTURE_2D, 0, kind, width_, height_, 0, kind, depth, nullptr);
 		glGenerateMipmap(GL_TEXTURE_2D);
@@ -146,19 +127,6 @@ namespace gui
 
 		glDisable(GL_TEXTURE_2D);
 		gl_error_checking();
-	}
-
-	void GLWidget::mousePressEvent(QMouseEvent* e)
-	{
-	}
-
-	void GLWidget::mouseMoveEvent(QMouseEvent* e)
-	{
-		
-	}
-
-	void GLWidget::mouseReleaseEvent(QMouseEvent* e)
-	{
 	}
 
 	void GLWidget::gl_error_checking()
