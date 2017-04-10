@@ -4,52 +4,19 @@
     <ClCompile Include="main.cc">
       <Filter>C++ Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gui_gl_window.cc">
-      <Filter>C++ Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui_gl_widget.cc">
-      <Filter>C++ Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_gui_gl_widget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_gui_gl_window.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="tools.cc">
       <Filter>C++ Source Files</Filter>
     </ClCompile>
     <ClCompile Include="crepe.cc">
       <Filter>C++ Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_gui_gl_widget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_gui_gl_window.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="C++ Header Files">
       <UniqueIdentifier>{5c647c48-a554-4ac8-a939-8ad65dd593f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C++ Header Files\gui">
-      <UniqueIdentifier>{b774cd70-6048-48d0-95a0-a6f2e453db43}</UniqueIdentifier>
-    </Filter>
     <Filter Include="C++ Source Files">
       <UniqueIdentifier>{7327b76a-7fc8-4583-afa5-6527decc4ddd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="C++ Source Files\gui">
-      <UniqueIdentifier>{3e1bc07b-d370-4d10-8022-0ac8095476cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Generated Files">
-      <UniqueIdentifier>{26901fe3-a36f-4d7e-a804-26d82a5c21a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{72774c1c-2f24-4029-803c-ea0f3a0588d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Form Files">
-      <UniqueIdentifier>{09aa449d-8665-47cd-9842-522bd890f4d9}</UniqueIdentifier>
     </Filter>
     <Filter Include="CUDA Header Files">
       <UniqueIdentifier>{c543d712-02c4-4aa4-9fe9-24d69bf4dab2}</UniqueIdentifier>
@@ -57,16 +24,10 @@
     <Filter Include="CUDA Source Files">
       <UniqueIdentifier>{93ba9ac8-5859-452f-a929-ef938de0e9ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{7db450b6-81d3-4774-a63b-4d3e8ecd2526}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools.hh">
       <Filter>C++ Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cuda_tools.cuh">
-      <Filter>CUDA Header Files</Filter>
     </ClInclude>
     <ClInclude Include="crepe.hh">
       <Filter>C++ Header Files</Filter>
@@ -74,20 +35,6 @@
     <ClInclude Include="filters.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_gl_window.h">
-      <Filter>C++ Header Files\gui</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="gui_gl_widget.hh">
-      <Filter>C++ Header Files\gui</Filter>
-    </CustomBuild>
-    <CustomBuild Include="gui_gl_window.hh">
-      <Filter>C++ Header Files\gui</Filter>
-    </CustomBuild>
-    <CustomBuild Include="gl_window.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu">
