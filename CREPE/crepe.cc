@@ -43,7 +43,7 @@ namespace crepe
 			return;
 		}
 		image_d.upload(frame);
-		result.create(image_d.size(), image_d.type());
+
 
 		//example of sobel & gauss algorithm.
 		//cv::cuda::TemplateMatching* matcher = cv::cuda::createTemplateMatching(CV_8U, CV_TM_CCORR);
@@ -52,8 +52,18 @@ namespace crepe
 		//cv::Ptr<cv::cuda::Filter> sobel = cv::cuda::createSobelFilter(image_d.type(), -1, 2, 2);
 		//sobel->apply(image_d, result);
 
+		//swap r&green channels
+		/*result.create(image_d.size(), image_d.type());
+ 		swap_rb_caller(image_d, result);*/
 
- 		swap_rb_caller(image_d, result);
+		
+		remove_b_caller(image_d);
+		//result.create(image_d.size(), image_d.type());
+		result.create(image_d.size(), CV_8U);
+		cv::cuda::cvtColor(image_d, result, CV_RGB2GRAY, 1);
+		cv::cuda::threshold(result, result, 128, 255, CV_THRESH_BINARY);
+		//cv::cuda::split(image_d, gpu_channel);
+		//cv::cuda::merge(gpu_channel, 3, result);
 		cv::Mat result_host;
 		result.download(result_host);
 		cv::imshow("CREPE", result_host);

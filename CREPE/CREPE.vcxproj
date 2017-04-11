@@ -125,17 +125,7 @@
       <Command>copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Core.dll" "$(TargetDir)"
 copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Gui.dll" "$(TargetDir)"
 copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5OpenGL.dll" "$(TargetDir)"
-copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudaarithm320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_core320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_highgui320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_imgcodecs320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_video320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_videoio320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_imgproc320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudaimgproc320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudafilters320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_ffmpeg320_64.dll" "$(TargetDir)"</Command>
+copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"</Command>
     </PostBuildEvent>
     <CudaCompile>
       <TargetMachinePlatform>64</TargetMachinePlatform>
@@ -166,7 +156,7 @@ copy /Y "$(OPENCV_DIR)\opencv_ffmpeg320_64.dll" "$(TargetDir)"</Command>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalOptions>-D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>.;.\GeneratedFiles;.\GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles;$(CudaToolkitDir)include;$(QTDIR)\include;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtOpenGL;$(QTDIR)\include\QtWidgets;$(OPENCV_DIR)\..\..\..\include</AdditionalIncludeDirectories>
