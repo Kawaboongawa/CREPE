@@ -7,18 +7,26 @@
 
 #include "crepe.hh"
 
+
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\water_bottle\\video.avi");
+	//camera 
+	//cv::VideoCapture capture(0);
+
+	//video 
+	cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&king.avi");
 	if (!capture.isOpened())
 		return 1;
-	unsigned int width = 800;
-	unsigned int height = 600;
-	void* gpu_frame = nullptr;
-	crepe::Crepe crepe(std::make_pair(600, 1024), gpu_frame, capture);
+	unsigned int width = 1280;
+	unsigned int height = 720;
+	crepe::Crepe crepe(std::make_pair(width, height), capture);
 	crepe.start();
 	return a.exec();
 
 }
+
 

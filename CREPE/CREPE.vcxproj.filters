@@ -10,6 +10,12 @@
     <ClCompile Include="crepe.cc">
       <Filter>C++ Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="filters.cc">
+      <Filter>C++ Source Files\Filters</Filter>
+    </ClCompile>
+    <ClCompile Include="mycannyfilter.cc">
+      <Filter>C++ Source Files\Filters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="C++ Header Files">
@@ -24,6 +30,12 @@
     <Filter Include="CUDA Source Files">
       <UniqueIdentifier>{93ba9ac8-5859-452f-a929-ef938de0e9ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="C++ Source Files\Filters">
+      <UniqueIdentifier>{df5c32fb-6610-4e42-ac6f-0429f5c5a04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C++ Header Files\Filters">
+      <UniqueIdentifier>{417d2a98-10ce-4dc6-9061-74f32d8585ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools.hh">
@@ -35,9 +47,21 @@
     <ClInclude Include="filters.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="filters.hh">
+      <Filter>C++ Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="mycannyfilter.hh">
+      <Filter>C++ Header Files\Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="mycannyfilter.cuh">
+      <Filter>CUDA Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu">
+      <Filter>CUDA Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="mycannyfilter.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
   </ItemGroup>

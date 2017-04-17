@@ -40,9 +40,8 @@ __global__ void remove_b_kernel(cv::cuda::PtrStepSz<uchar3> src)
 
 void swap_rb_caller(const cv::cuda::PtrStepSz<uchar3>& src, cv::cuda::PtrStep<uchar3> dst)
 {
-	unsigned int threads_2d = get_max_threads_2d();
-	dim3 threads(threads_2d, threads_2d);
-	dim3 blocks((src.cols + threads_2d - 1) / threads_2d, (src.rows + threads_2d - 1) / threads_2d); 
+	dim3 threads(16, 16);
+	dim3 blocks((src.cols + threads.x - 1) / threads.x, (src.rows + threads.y - 1) / threads.y); 
 	swap_rb_kernel <<<blocks, threads, 0, 0>>> (src, dst);
 }
 

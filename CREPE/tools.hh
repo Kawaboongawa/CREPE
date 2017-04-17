@@ -15,6 +15,7 @@
 */
 unsigned int get_max_threads();
 
+
 /*! \brief Getter on max threads in two dimensions
 **
 ** Fetch the maximum number of threads available in two dimensions

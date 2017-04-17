@@ -10,18 +10,15 @@
 #include <iostream>
 #include <windows.h>
 
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
-#include <opencv2/opencv.hpp>
-#include <opencv2/cudaarithm.hpp>
-
-# include <cuda_gl_interop.h>
-# include <cuda_runtime.h>
-
 #include <QMainWindow>
 #include <QThread>
 
-#include "filters.cuh"
+#include <opencv2/cudaarithm.hpp>
+#include <opencv2/opencv.hpp>
+
+
+#include "filters.hh"
+#include "mycannyfilter.hh"
 
 
 namespace crepe
@@ -31,13 +28,13 @@ namespace crepe
 	{
 
 	public:
-		Crepe(const std::pair<int, int>& screen_size, void* gpu_frame, cv::VideoCapture capture);
+		Crepe(const std::pair<int, int>& screen_size, cv::VideoCapture capture);
 
 		~Crepe();
 
 		void run() override;
 
-		void process();
+		cv::cuda::GpuMat process(cv::cuda::GpuMat src);
 
 	private:
 
@@ -45,9 +42,13 @@ namespace crepe
 
 		std::pair<int, int> screen_size_;
 
-		void* gpu_frame_;
-
 		int fps_;
+
+		Filter rgb_filter_;
+
+	    Filter c1_filter_;
+
+		canny::MyCannyFilter canny_filter_;
 
 	};
 }

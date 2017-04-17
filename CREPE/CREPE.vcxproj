@@ -190,12 +190,16 @@ copy /Y "$(OPENCV_DIR)\opencv_ffmpeg320_64.dll" "$(TargetDir)"</Command>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="filters.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="crepe.cc" />
+    <ClCompile Include="mycannyfilter.cc" />
     <ClCompile Include="tools.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="filters.cuh" />
+    <ClInclude Include="filters.hh" />
+    <ClInclude Include="mycannyfilter.hh" />
     <ClInclude Include="tools.hh" />
     <ClInclude Include="crepe.hh">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\Debug\moc_%(Filename).cc"</Command>
@@ -205,6 +209,10 @@ copy /Y "$(OPENCV_DIR)\opencv_ffmpeg320_64.dll" "$(TargetDir)"</Command>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu" />
+    <CudaCompile Include="mycannyfilter.cu" />
+    <ClInclude Include="mycannyfilter.cuh">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,7 @@ unsigned int get_max_threads()
 	return max_threads_per_block_1d;
 }
 
+
 unsigned int get_max_threads_2d()
 {
 	static int max_threads_per_block_2d;
