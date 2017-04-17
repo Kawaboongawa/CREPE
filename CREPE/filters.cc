@@ -7,6 +7,7 @@ namespace crepe
 		: type_(type)
 		, gauss_filter_(cv::cuda::createGaussianFilter(type, -1, cv::Size(3, 3), 1.5, 1.5))
 		, sobel_filter_(cv::cuda::createSobelFilter(type, -1, 1, 1))
+		, canny_edge_detector_(cv::cuda::createCannyEdgeDetector(100, 300))
 	{}
 
 	Filter::~Filter()
@@ -21,6 +22,12 @@ namespace crepe
 	{
 		sobel_filter_->apply(src, dst);
 	}
+
+	void Filter::canny(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst)
+	{
+		canny_edge_detector_->detect(src, dst);
+	}
+
 
 	void Filter::rgb2grey(cv::cuda::GpuMat&src, cv::cuda::GpuMat& dst)
 	{

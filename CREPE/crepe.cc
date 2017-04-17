@@ -15,44 +15,18 @@ namespace crepe
 
 		//video
 		fps_ = capture_.get(CV_CAP_PROP_FPS);
+		init_database();
 	}
 
 	Crepe::~Crepe()
 	{}
-
-
-	void yolo(cv::Mat& dst, cv::Mat& src)
-	{
-		distanceTransform(src, dst, CV_DIST_L2, 3);
-		cv::normalize(dst, dst, 0, 1., cv::NORM_MINMAX);
-		cv::threshold(dst, dst, .4, 1., CV_THRESH_BINARY);
-		// Dilate a bit the dist image
-		cv::Mat kernel1 = cv::Mat::ones(3, 3, CV_8UC1);
-		dilate(dst, dst, kernel1);
-		erode(dst, dst, kernel1);
-		// Create the CV_8U version of the distance image
-		// It is needed for findContours()
-	/*	cv::Mat dist_8u;
-		dst.convertTo(dist_8u, CV_8U);
-		// Find total markers
-		std::vector<std::vector<cv::Point> > contours;
-		findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
-		// Create the marker image for the watershed algorithm
-		cv::Mat markers = cv::Mat::zeros(dst.size(), CV_32SC1);
-		// Draw the foreground markers
-		for (size_t i = 0; i < contours.size(); i++)
-			cv::drawContours(markers, contours, static_cast<int>(i), cv::Scalar::all(static_cast<int>(i) + 1), -1);
-		// Draw the background marker
-		cv::circle(markers, cv::Point(5, 5), 3, CV_RGB(255, 255, 255), -1);*/
-
-	}
 
 	void Crepe::run()
 	{
 		cv::cuda::setDevice(0);
 		int delay = 1000 / fps_;
 		cv::namedWindow("CREPE", CV_WINDOW_NORMAL);
-		cv::resizeWindow("CREPE", screen_size_.first, screen_size_.second);
+		//cv::resizeWindow("CREPE", screen_size_.first, screen_size_.second);
 		cv::Mat frame;
 		capture_ >> frame;
 		canny_filter_.init(frame.size());
@@ -63,7 +37,6 @@ namespace crepe
 			cv::cuda::GpuMat result_device = process(frame_device);
 			cv::Mat result_host;
 			result_device.download(result_host);
-			//yolo(result_host, result_host);
 			cv::imshow("CREPE", result_host);
 			cv::waitKey(delay);
 			capture_ >> frame;
@@ -75,22 +48,49 @@ namespace crepe
 		}
 	}
 
-	cv::cuda::GpuMat Crepe::process(cv::cuda::GpuMat src) {
+	cv::cuda::GpuMat Crepe::process(GpuMat src) {
 
-		//cv::cuda::GpuMat dst;
-		//rgb_filter_.sobel(src, dst);
-		cv::cuda::GpuMat res;
-		//res.create(src.size(), CV_8UC);
-		rgb_filter_.rgb2grey(src, res);
-		rgb_filter_.rgb2grey(src, src);
-		cv::Ptr<cv::cuda::CannyEdgeDetector> canny_edge_detector = cv::cuda::createCannyEdgeDetector(100, 300);
-		canny_filter_.apply(res, res);
-		canny_edge_detector->detect(src, src);
-		//c1_filter_.sobel(res, res);
-		cv::Mat yolo;
-		src.download(yolo);
-		cv::imshow("le vrai canny", yolo);
+		GpuMat res = compute_edges(src);
+		cv::Mat tmp;
+		std::vector<std::vector<cv::Point> > contours;
+		res.download(tmp);
+		cv::Mat dist_8u;
+		tmp.convertTo(dist_8u, CV_8U);
+		//findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 		return res;
+	}
+
+	GpuMat Crepe::compute_edges(GpuMat& src)
+	{
+		cv::cuda::GpuMat dst;
+		rgb_filter_.rgb2grey(src, dst);
+		rgb_filter_.canny(dst, dst);
+		return dst;
+	}
+
+	void Crepe::init_database()
+	{
+		cv::Mat src; 
+		cv::Mat src_gray;
+		cv::Mat canny_output;
+		cv::Mat kernel = (cv::Mat_<float>(3, 3) <<
+			1, 1, 1,
+			1, -8, 1,
+			1, 1, 1);
+
+		src = cv::imread("C:\\Users\\Cyril\\Desktop\\chess_video\\knight\\IMAG1365.jpg");
+		//cv::filter2D(src, src, CV_8UC3, kernel);
+		cv::imshow("original photo", src);
+		GpuMat srcdev;
+		srcdev.upload(src);
+		GpuMat res = compute_edges(srcdev);
+		res.download(src_gray);
+		//cv::cvtColor(src, src_gray, cv::COLOR_BGR2GRAY);
+		//cv::imshow("gray photo", src_gray);
+		//Canny(src_gray, canny_output, 100,  300, 3);
+		cv::imshow("canny photo", src_gray);
+		cv::waitKey(0);
+
 	}
 
 }

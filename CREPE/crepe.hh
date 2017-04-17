@@ -20,7 +20,7 @@
 #include "filters.hh"
 #include "mycannyfilter.hh"
 
-
+using namespace cv::cuda;
 namespace crepe
 {
 
@@ -34,7 +34,14 @@ namespace crepe
 
 		void run() override;
 
-		cv::cuda::GpuMat process(cv::cuda::GpuMat src);
+		GpuMat process(cv::cuda::GpuMat src);
+
+		// take a CV_8UC3 matrix and return a CV_8UC1 one with edges contours
+		GpuMat compute_edges(GpuMat& src);
+
+		void init_database();
+
+
 
 	private:
 

@@ -73,17 +73,17 @@ namespace canny
 			if (dir < 0)
 				dir *= -1;
 
-			if (dir > 158 || dir < 22)
+			if (dir >= 158 || dir < 23)
 			{
 				if (m >= mag(y, x - 1) && m >= mag(y, x + 1))
 					edge_type = 1 + static_cast<int>(m > high_thresh);
 			}
-			else if (dir < 67)
+			else if (dir < 68)
 			{
 				if (m >= mag(y - 1, x + 1) && m >= mag(y + 1, x - 1))
 					edge_type = 1 + static_cast<int>(m > high_thresh);
 			}
-			else if (dir < 112)
+			else if (dir < 113)
 			{
 				if (m >= mag(y - 1, x) && m >= mag(y + 1, x))
 					edge_type = 1 + static_cast<int>(m > high_thresh);

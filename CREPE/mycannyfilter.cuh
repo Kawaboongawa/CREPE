@@ -11,7 +11,7 @@
 #include "tools.hh"
 
 // 180/PI value
-#define PI_180 57.29577951f
+#define PI_180 57.2957795130823208767981548141051703324054f
 
 using namespace cv::cuda;
 
