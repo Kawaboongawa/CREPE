@@ -70,7 +70,7 @@ namespace crepe
 
 	void Crepe::init_database()
 	{
-		cv::Mat src; 
+		/*cv::Mat src; 
 		cv::Mat src_gray;
 		cv::Mat canny_output;
 		cv::Mat kernel = (cv::Mat_<float>(3, 3) <<
@@ -88,8 +88,7 @@ namespace crepe
 		//cv::cvtColor(src, src_gray, cv::COLOR_BGR2GRAY);
 		//cv::imshow("gray photo", src_gray);
 		//Canny(src_gray, canny_output, 100,  300, 3);
-		cv::imshow("canny photo", src_gray);
-		cv::waitKey(0);
+		cv::imshow("canny photo", src_gray);*/
 
 	}
 

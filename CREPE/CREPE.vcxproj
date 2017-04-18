@@ -119,7 +119,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(OPENCV_DIR)\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ShowProgress>LinkVerbose</ShowProgress>
-      <AdditionalDependencies>cudart.lib;cufft.lib;cuda.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Widgets.lib;opencv_calib3d320.lib;opencv_core320.lib;opencv_cudaarithm320.lib;opencv_cudabgsegm320.lib;opencv_cudacodec320.lib;opencv_cudafeatures2d320.lib;opencv_cudafilters320.lib;opencv_cudaimgproc320.lib;opencv_cudalegacy320.lib;opencv_cudaobjdetect320.lib;opencv_cudaoptflow320.lib;opencv_cudastereo320.lib;opencv_cudawarping320.lib;opencv_cudev320.lib;opencv_features2d320.lib;opencv_flann320.lib;opencv_highgui320.lib;opencv_imgcodecs320.lib;opencv_imgproc320.lib;opencv_ml320.lib;opencv_objdetect320.lib;opencv_photo320.lib;opencv_shape320.lib;opencv_stitching320.lib;opencv_superres320.lib;opencv_video320.lib;opencv_videoio320.lib;opencv_videostab320.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cudart.lib;cufft.lib;cuda.lib;qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5OpenGL.lib;opengl32.lib;glu32.lib;Qt5Widgets.lib;opencv_calib3d320d.lib;opencv_core320d.lib;opencv_cudaarithm320d.lib;opencv_cudabgsegm320d.lib;opencv_cudacodec320d.lib;opencv_cudafeatures2d320d.lib;opencv_cudafilters320d.lib;opencv_cudaimgproc320d.lib;opencv_cudalegacy320d.lib;opencv_cudaobjdetect320d.lib;opencv_cudaoptflow320d.lib;opencv_cudastereo320d.lib;opencv_cudawarping320d.lib;opencv_cudev320d.lib;opencv_features2d320d.lib;opencv_flann320d.lib;opencv_highgui320d.lib;opencv_imgcodecs320d.lib;opencv_imgproc320d.lib;opencv_ml320d.lib;opencv_objdetect320d.lib;opencv_photo320d.lib;opencv_shape320.lib;opencv_stitching320d.lib;opencv_superres320d.lib;opencv_video320d.lib;opencv_videoio320d.lib;opencv_videostab320d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Core.dll" "$(TargetDir)"
@@ -131,6 +131,9 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"</Comm
       <TargetMachinePlatform>64</TargetMachinePlatform>
       <CodeGeneration>compute_30,sm_30;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_61,sm_61;%(CodeGeneration)</CodeGeneration>
     </CudaCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -174,16 +177,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"</Comm
 copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Gui.dll" "$(TargetDir)"
 copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5OpenGL.dll" "$(TargetDir)"
 copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudaarithm320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_core320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_highgui320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_imgcodecs320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_video320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_videoio320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_imgproc320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudaimgproc320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_cudafilters320.dll" "$(TargetDir)"
-copy /Y "$(OPENCV_DIR)\opencv_ffmpeg320_64.dll" "$(TargetDir)"</Command>
+</Command>
     </PostBuildEvent>
     <CudaCompile>
       <CodeGeneration>compute_30,sm_30;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_61,sm_61;%(CodeGeneration)</CodeGeneration>
