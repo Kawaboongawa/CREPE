@@ -149,9 +149,10 @@ Direction fromTo(cv::Point from, cv::Point to) {
 	}
 }
 
-void directedContour(cv::Mat img, cv::Point ij, cv::Point i2j2) {
+std::vector<cv::Point> directedContour(cv::Mat img, cv::Point ij, cv::Point i2j2, float ndb) {
 	Direction dir = fromTo(ij, i2j2);
 	Direction trace = clockwise(dir);
+	std::vector<cv::Point> border;
 
 	cv::Point i1j1(-1, -1);
 	while (trace != dir) {
@@ -183,7 +184,16 @@ void directedContour(cv::Mat img, cv::Point ij, cv::Point i2j2) {
 			checked[static_cast<int>(trace)] = true;
 			trace = clockwise(trace);
 		}
-		// TODO: OPERATION PERFORM
+		// BEGIN TODO: OPERATION PERFORM i3j3, checked
+		border.push_back(i3j3);
+		if (crossesEastBorder(img, checked, i3j3)) {
+			img.at<uchar>(i3j3) = -ndb;
+		}
+		else if (img.at<uchar>(i3j3) == 1) {
+			img.at<uchar>(i3j3) = ndb;
+		}
+		// END TODO
+
 		if (i4j4.x == ij.x && i4j4.y == ij.y && i3j3.x == i1j1.x && i3j3.y == i1j1.y)
 			break;
 		i2j2 = i3j3;
@@ -212,4 +222,9 @@ bool isOuterBorderStart(cv::Mat img, size_t i, size_t j) {
 
 bool isHoleBorderStart(cv::Mat img, size_t i, size_t j) {
 	return (img.at<uchar>(i, j) >= 1 && (j == img.cols - 1 || img.at<uchar>(i, j + 1) == 0));
+}
+
+bool crossesEastBorder(cv::Mat img, bool checked[8], cv::Point p) {
+	bool b = checked[static_cast<int>(fromTo(p, cv::Point(p.x + 1, p.y)))];
+	return img.at<uchar>(p) != 0 && (p.x == img.cols - 1 || b);
 }
