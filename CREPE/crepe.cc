@@ -70,15 +70,18 @@ namespace crepe
 
 	void Crepe::init_database()
 	{
-		/*cv::Mat src; 
+		cv::Mat src; 
 		cv::Mat src_gray;
-		cv::Mat canny_output;
 		cv::Mat kernel = (cv::Mat_<float>(3, 3) <<
 			1, 1, 1,
 			1, -8, 1,
 			1, 1, 1);
-
-		src = cv::imread("C:\\Users\\Cyril\\Desktop\\chess_video\\knight\\IMAG1365.jpg");
+		std::vector<std::vector<cv::Point>> contours;
+		std::vector<cv::Vec4i> hierarchy;
+		//src = cv::imread("..\\..\\database\\knight\\IMAG1366.png");
+		char currentPath[FILENAME_MAX];
+		_getcwd(currentPath, sizeof (currentPath));
+		src = cv::imread("..\\..\\database\\knight\\IMAG1366.png");
 		//cv::filter2D(src, src, CV_8UC3, kernel);
 		cv::imshow("original photo", src);
 		GpuMat srcdev;
@@ -88,7 +91,44 @@ namespace crepe
 		//cv::cvtColor(src, src_gray, cv::COLOR_BGR2GRAY);
 		//cv::imshow("gray photo", src_gray);
 		//Canny(src_gray, canny_output, 100,  300, 3);
-		cv::imshow("canny photo", src_gray);*/
+		cv::findContours(src_gray, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+		// Draw contours
+		cv::RNG rng(12345);
+		cv::Mat drawing = cv::Mat::zeros(src_gray.size(), CV_8UC3);
+		std::vector<cv::Rect> boundRect(contours.size());
+		std::vector<std::vector<cv::Point> > contours_poly(contours.size());
+		for (int i = 0; i < contours.size(); i++)
+		{
+			cv::approxPolyDP(cv::Mat(contours[i]), contours_poly[i], 3, true);
+			boundRect[i] = cv::boundingRect(cv::Mat(contours_poly[i]));
+			if (contours[i].size() < 100)
+				continue;
+
+			boundRect[i] = cv::boundingRect(cv::Mat(contours_poly[i]));
+			cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+			drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
+			rectangle(src, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
+		}
+
+	
+		int index = 0;
+		for (int i = 0; i < contours.size(); i++)
+		{
+			if (contours[i].size() > contours[index].size())
+				index = i;
+		}
+		int size = contours[index].size();
+		ushort2* edges = (ushort2*)malloc(size * sizeof(ushort2));
+		for (int i = 0; i < size; i++)
+		{
+			edges[i].x = contours[index][i].x;
+			edges[i].y = contours[index][i].y;
+		}
+		FourierDescriptor fd(edges, size);
+		fd.compute_descriptors();
+		cv::namedWindow("Contours", cv::WINDOW_AUTOSIZE);
+		cv::imshow("Contours", drawing);
+		//cv::waitKey(0);
 
 	}
 

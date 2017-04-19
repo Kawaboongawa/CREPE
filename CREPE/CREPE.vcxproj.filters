@@ -16,6 +16,9 @@
     <ClCompile Include="mycannyfilter.cc">
       <Filter>C++ Source Files\Filters</Filter>
     </ClCompile>
+    <ClCompile Include="fourier_descriptor.cc">
+      <Filter>C++ Source Files\Filters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="C++ Header Files">
@@ -56,12 +59,21 @@
     <ClInclude Include="mycannyfilter.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fourier_descriptor.cuh">
+      <Filter>CUDA Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="fourier_descriptor.hh">
+      <Filter>C++ Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="mycannyfilter.cu">
+      <Filter>CUDA Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="fourier_descriptor.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
   </ItemGroup>

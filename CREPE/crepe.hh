@@ -9,6 +9,8 @@
 #include <memory>
 #include <iostream>
 #include <windows.h>
+#include <stdio.h>
+#include <direct.h>
 
 #include <QMainWindow>
 #include <QThread>
@@ -19,6 +21,7 @@
 
 #include "filters.hh"
 #include "mycannyfilter.hh"
+#include "fourier_descriptor.hh"
 
 using namespace cv::cuda;
 namespace crepe

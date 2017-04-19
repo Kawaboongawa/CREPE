@@ -185,6 +185,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="filters.cc" />
+    <ClCompile Include="fourier_descriptor.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="crepe.cc" />
     <ClCompile Include="mycannyfilter.cc" />
@@ -193,6 +194,8 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
   <ItemGroup>
     <ClInclude Include="filters.cuh" />
     <ClInclude Include="filters.hh" />
+    <ClInclude Include="fourier_descriptor.cuh" />
+    <ClInclude Include="fourier_descriptor.hh" />
     <ClInclude Include="mycannyfilter.hh" />
     <ClInclude Include="tools.hh" />
     <ClInclude Include="crepe.hh">
@@ -203,6 +206,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu" />
+    <CudaCompile Include="fourier_descriptor.cu" />
     <CudaCompile Include="mycannyfilter.cu" />
     <ClInclude Include="mycannyfilter.cuh">
       <FileType>Document</FileType>
