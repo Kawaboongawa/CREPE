@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	//cv::VideoCapture capture(0);
 
 	//video 
-	cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&king.avi");
+	cv::VideoCapture capture("C:\\Users\\lugand_j\\Documents\\CREPE-assets\\black_queen&king.avi");
 	if (!capture.isOpened())
 		return 1;
 	unsigned int width = 1280;

@@ -60,5 +60,6 @@ namespace crepe
 
 		canny::MyCannyFilter canny_filter_;
 
+		cv::RNG rng;
 	};
 }

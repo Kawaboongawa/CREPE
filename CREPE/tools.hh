@@ -3,6 +3,7 @@
 
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
+#include <opencv2/opencv.hpp>
 
 
 
@@ -41,3 +42,5 @@ unsigned int get_max_blocks();
 * \param nb_threads Number of threads per block. */
 unsigned map_blocks_to_problem(const size_t problem_size,
 	const unsigned nb_threads);
+
+void myFindContours(cv::InputOutputArray img);
