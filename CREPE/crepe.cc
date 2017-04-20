@@ -61,7 +61,8 @@ namespace crepe
 		std::vector<cv::Vec4i> hierarchy;
 
 		tmp.convertTo(dist_8u, CV_8U);
-		findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+		myFindContours(dist_8u, contours);
+		//findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 
 		/// Draw contours
 		for (int i = 0; i< contours.size(); i++)

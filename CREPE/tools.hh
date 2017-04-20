@@ -43,4 +43,24 @@ unsigned int get_max_blocks();
 unsigned map_blocks_to_problem(const size_t problem_size,
 	const unsigned nb_threads);
 
-void myFindContours(cv::InputOutputArray img);
+enum Direction {
+	NORTH = 0,
+	NORTH_EAST = 1,
+	EAST = 2,
+	SOUTH_EAST = 3,
+	SOUTH = 4,
+	SOUTH_WEST = 5,
+	WEST = 6,
+	NORTH_WEST = 7,
+	NODIR = 8
+};
+
+void myFindContours(cv::Mat img, cv::OutputArrayOfArrays contours);
+bool isOuterBorderStart(cv::Mat img, size_t i, size_t j);
+bool isHoleBorderStart(cv::Mat img, size_t i, size_t j);
+bool crossesEastBorder(cv::Mat img, bool checked[8], cv::Point p);
+cv::Point active(Direction d, cv::Mat img, cv::Point point);
+std::vector<cv::Point> directedContour(cv::Mat img, cv::Point ij, cv::Point i2j2, float ndb);
+Direction fromTo(cv::Point from, cv::Point to);
+Direction clockwise(Direction d);
+Direction counterClockwise(Direction d);
