@@ -1,6 +1,6 @@
 #include "mycannyfilter.hh"
 
-namespace canny
+namespace filter
 {
 	MyCannyFilter::MyCannyFilter(int min_thresh, int max_thresh)
 		: min_thresh_(min_thresh)

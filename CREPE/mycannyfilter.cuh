@@ -15,7 +15,7 @@
 
 using namespace cv::cuda;
 
-namespace canny
+namespace filter
 {
 	void getMagnitude_caller(
 		const PtrStepSz<uchar>& src, 

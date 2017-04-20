@@ -11,13 +11,22 @@
       <Filter>C++ Source Files</Filter>
     </ClCompile>
     <ClCompile Include="filters.cc">
-      <Filter>C++ Source Files\Filters</Filter>
+      <Filter>C++ Source Files\Image Processing</Filter>
     </ClCompile>
     <ClCompile Include="mycannyfilter.cc">
-      <Filter>C++ Source Files\Filters</Filter>
+      <Filter>C++ Source Files\Image Processing</Filter>
+    </ClCompile>
+    <ClCompile Include="chessman.cc">
+      <Filter>C++ Source Files\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="database_handler.cc">
+      <Filter>C++ Source Files\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="filter_handler.cc">
+      <Filter>C++ Source Files\Image Processing</Filter>
     </ClCompile>
     <ClCompile Include="fourier_descriptor.cc">
-      <Filter>C++ Source Files\Filters</Filter>
+      <Filter>C++ Source Files\Image Processing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,11 +42,17 @@
     <Filter Include="CUDA Source Files">
       <UniqueIdentifier>{93ba9ac8-5859-452f-a929-ef938de0e9ba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C++ Source Files\Filters">
-      <UniqueIdentifier>{df5c32fb-6610-4e42-ac6f-0429f5c5a04d}</UniqueIdentifier>
+    <Filter Include="C++ Header Files\Database">
+      <UniqueIdentifier>{dc4d831d-cec2-4336-9d31-74be9795ca70}</UniqueIdentifier>
     </Filter>
-    <Filter Include="C++ Header Files\Filters">
+    <Filter Include="C++ Source Files\Database">
+      <UniqueIdentifier>{a2cd2f4a-812d-46d5-8494-93cd03eab50e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C++ Header Files\Image Processing">
       <UniqueIdentifier>{417d2a98-10ce-4dc6-9061-74f32d8585ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C++ Source Files\Image Processing">
+      <UniqueIdentifier>{df5c32fb-6610-4e42-ac6f-0429f5c5a04d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +66,10 @@
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
     <ClInclude Include="filters.hh">
-      <Filter>C++ Header Files\Filters</Filter>
+      <Filter>C++ Header Files\Image Processing</Filter>
     </ClInclude>
     <ClInclude Include="mycannyfilter.hh">
-      <Filter>C++ Header Files\Filters</Filter>
+      <Filter>C++ Header Files\Image Processing</Filter>
     </ClInclude>
     <ClInclude Include="mycannyfilter.cuh">
       <Filter>CUDA Header Files</Filter>
@@ -62,8 +77,17 @@
     <ClInclude Include="fourier_descriptor.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chessman.hh">
+      <Filter>C++ Header Files\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="database_handler.hh">
+      <Filter>C++ Header Files\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="filter_handler.hh">
+      <Filter>C++ Header Files\Image Processing</Filter>
+    </ClInclude>
     <ClInclude Include="fourier_descriptor.hh">
-      <Filter>C++ Header Files</Filter>
+      <Filter>C++ Header Files\Image Processing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

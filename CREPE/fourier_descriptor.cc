@@ -13,7 +13,6 @@ namespace crepe
 		cudaMalloc(&gpu_descriptors_, size * sizeof(float2));
 		cudaMalloc(&shape_, size * sizeof(ushort2));
 		cudaMemcpy(shape_, shape, size * sizeof(ushort2), cudaMemcpyHostToDevice);
-		free(shape);
 	}
 
 	FourierDescriptor::~FourierDescriptor()
@@ -29,14 +28,6 @@ namespace crepe
 	{
 		centroid_distance_caller(shape_, gpu_descriptors_, size_, centroid_);
 		compute_descriptors_caller(gpu_descriptors_, gpu_descriptors_, size_, plan1d_);
-		/*float2* a = (float2*)malloc(300 * sizeof(float2));
-		cudaMemcpy(a, gpu_descriptors_, 100 * sizeof(float2), cudaMemcpyDeviceToHost);
-		float2 x0 = a[0];
-		float2 x1 = a[1];
-		float2 x2 = a[2];
-		float2 x3 = a[3];
-		float2 x4 = a[4];
-		float2 x5 = a[5];*/
 	}
 
 	void FourierDescriptor::compute_centroid()

@@ -5,7 +5,7 @@
 
 #include "filters.cuh"
 
-namespace crepe
+namespace filter
 {
 	class Filter
 	{

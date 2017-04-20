@@ -1,6 +1,6 @@
 #include "filters.hh"
 
-namespace crepe
+namespace filter
 {
 	//TODO : IF needed add parameters to constructor to customize filters
 	Filter::Filter(int type)

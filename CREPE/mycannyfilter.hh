@@ -7,7 +7,7 @@
 
 using namespace cv::cuda;
 
-namespace canny
+namespace filter
 {
 	class MyCannyFilter
 	{

@@ -184,7 +184,10 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="chessman.cc" />
+    <ClCompile Include="database_handler.cc" />
     <ClCompile Include="filters.cc" />
+    <ClCompile Include="filter_handler.cc" />
     <ClCompile Include="fourier_descriptor.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="crepe.cc" />
@@ -192,8 +195,11 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     <ClCompile Include="tools.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chessman.hh" />
+    <ClInclude Include="database_handler.hh" />
     <ClInclude Include="filters.cuh" />
     <ClInclude Include="filters.hh" />
+    <ClInclude Include="filter_handler.hh" />
     <ClInclude Include="fourier_descriptor.cuh" />
     <ClInclude Include="fourier_descriptor.hh" />
     <ClInclude Include="mycannyfilter.hh" />

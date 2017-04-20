@@ -1,7 +1,7 @@
 
 #include "mycannyfilter.cuh"
 
-namespace canny
+namespace filter
 {
 
 	__device__ int counter = 0;
@@ -308,7 +308,7 @@ namespace canny
 	void edgesHysteresisGlobal_caller(PtrStepSzi map, short2* st1, short2* st2)
 	{
 		void* counter_ptr;
-		cudaGetSymbolAddress(&counter_ptr, canny::counter);
+		cudaGetSymbolAddress(&counter_ptr, filter::counter);
 
 		int count;
 		cudaMemcpyAsync(&count, counter_ptr, sizeof(int), cudaMemcpyDeviceToHost);
