@@ -101,7 +101,7 @@ void myFindContours(cv::Mat img, cv::OutputArrayOfArrays contours) {
 				border.first = directedContour(img, ij, from, nbd[0]);
 				if (border.first.size() == 0) {
 					border.first.push_back(ij);
-					img.at<unsigned char>(j, i) = -nbd[0];
+					img.at<unsigned char>(j, i) = -nbd[0]; // TODO: check unsigned
 				}
 				d.push_back(border.first);
 			}
@@ -194,10 +194,10 @@ std::vector<cv::Point> directedContour(cv::Mat img, cv::Point ij, cv::Point i2j2
 		// BEGIN TODO: OPERATION PERFORM i3j3, checked
 		border.push_back(i3j3);
 		if (crossesEastBorder(img, checked, i3j3)) {
-			img.at<unsigned char>(i3j3) = (unsigned char)(-ndb);
+			img.at<unsigned char>(i3j3) = static_cast<unsigned char>(-ndb); // TODO: check unsigned
 		}
 		else if (img.at<unsigned char>(i3j3) == 1) {
-			img.at<unsigned char>(i3j3) = (unsigned char)ndb;
+			img.at<unsigned char>(i3j3) = static_cast<unsigned char>(ndb); // TODO: check unsigned
 		}
 
 		// END TODO
