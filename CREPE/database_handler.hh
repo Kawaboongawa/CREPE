@@ -18,11 +18,11 @@ namespace crepe
 
 		void init_database();
 
+		std::string match_object(const FourierDescriptor& fd, uint ndesc);
+
 	private :
 
-		FourierDescriptor& get_decriptor(const std::string& path);
-
-		
+		std::shared_ptr<FourierDescriptor> get_descriptor(const std::string& path);
 
 	private:
 
@@ -31,5 +31,6 @@ namespace crepe
 		std::vector<std::string> piece_name_;
 
 		filter::FilterHandler filter_;
+		
 	};
 }

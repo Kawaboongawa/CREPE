@@ -3,6 +3,7 @@
 #include <opencv2/cudaarithm.hpp>
 #include <opencv2/opencv.hpp>
 #include <cufft.h>
+#include <cuda.h>
 #include "fourier_descriptor.cuh"
 
 using namespace cv::cuda;
@@ -17,6 +18,8 @@ namespace crepe
 		~FourierDescriptor();
 
 		void compute_descriptors();
+
+		float compare_descriptors(const FourierDescriptor& desc, uint size);
 
 
 	private:

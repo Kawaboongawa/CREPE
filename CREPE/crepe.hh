@@ -30,17 +30,20 @@ namespace crepe
 	{
 
 	public:
-		Crepe(const std::pair<int, int>& screen_size, cv::VideoCapture capture);
+		Crepe(
+			const std::pair<int, int>& screen_size, 
+			cv::VideoCapture capture);
 
 		~Crepe();
 
 		void run() override;
 
-		GpuMat process(cv::cuda::GpuMat src);
+		void process(cv::Mat src);
 
-		void init_database();
-
-
+		void draw_contours(
+			cv::Mat src, 
+			std::vector<std::vector<cv::Point> > contours, 
+			std::vector<std::string> names);
 
 	private:
 

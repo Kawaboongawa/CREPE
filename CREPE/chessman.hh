@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include "fourier_descriptor.hh"
 
@@ -24,13 +25,18 @@ namespace crepe
 
 		~Chessman();
 
-		void add_descriptor(FourierDescriptor descriptor);
+		void add_descriptor(std::shared_ptr<FourierDescriptor> descriptor);
+
+		std::vector<std::shared_ptr<FourierDescriptor>> get_descriptors() 
+		{ 
+			return descriptors_; 
+		}
 
 	private:
 
 		chesspiece piece_;
 
-		std::vector<FourierDescriptor> descriptors_;
+		std::vector<std::shared_ptr<FourierDescriptor>> descriptors_;
 
 	};
 }

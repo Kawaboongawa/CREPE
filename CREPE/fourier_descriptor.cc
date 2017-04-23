@@ -21,13 +21,24 @@ namespace crepe
 
 		cudaFree(gpu_descriptors_);
 
-		cudaFree(shape_);
+		if (shape_ != nullptr)
+			cudaFree(shape_);
+	}
+
+	float FourierDescriptor::compare_descriptors(const FourierDescriptor& desc, uint size)
+	{
+		if (size > size_ || size > desc.size_)
+			size = std::min(size_, desc.size_);
+		float value = compare_descriptors_caller(gpu_descriptors_ + 1, desc.gpu_descriptors_ + 1, size);
+		return value;
 	}
 
 	void FourierDescriptor::compute_descriptors()
 	{
 		centroid_distance_caller(shape_, gpu_descriptors_, size_, centroid_);
-		compute_descriptors_caller(gpu_descriptors_, gpu_descriptors_, size_, plan1d_);
+		cudaFree(shape_);
+		shape_ = nullptr;
+		compute_centroid_signature_caller(gpu_descriptors_, gpu_descriptors_, size_, plan1d_);
 	}
 
 	void FourierDescriptor::compute_centroid()

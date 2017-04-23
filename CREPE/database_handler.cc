@@ -31,20 +31,24 @@ namespace crepe
 		}
 		return index;
 	}
-
-	FourierDescriptor& Database::get_decriptor(const std::string& path)
+	//void Database::get_decriptor(const std::string& path)
+	std::shared_ptr<FourierDescriptor> Database::get_descriptor(const std::string& path)
 	{
 
 		std::vector<std::vector<cv::Point>> contours;
 		std::vector<cv::Vec4i> hierarchy;
 		cv::Mat src = cv::imread(path);
 		cv::Mat canny;
-		cv::imshow("original photo", src);
+		//cv::imshow("original photo", src);
 		GpuMat srcdev;
 		srcdev.upload(src);
 		GpuMat res = filter_.compute_edges(srcdev);
 		res.download(canny);
+		//cv::imshow("canny photo", canny);
+		//cv::waitKey(0);
 		cv::findContours(canny, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+		if (contours.empty())
+			return nullptr;
 		int index = findMaxIndex(contours);
 		int size = contours[index].size();
 		//FIXME: THIS IS UGLY and need to be changed
@@ -56,10 +60,33 @@ namespace crepe
 			edges[i].y = contours[index][i].y;
 		}
 		//////////////////
-		FourierDescriptor fd(edges, size);
+		std::shared_ptr<FourierDescriptor> fd = std::make_shared<FourierDescriptor>(edges, size);
 		free(edges);
-		fd.compute_descriptors();
+		fd->compute_descriptors();
 		return fd;
+	}
+
+	std::string Database::match_object(const FourierDescriptor& fd, uint ndesc)
+	{
+		int index = 0;
+		float score = FLT_MAX;
+		for (int i = 0; i < chessmans_.size(); i++)
+		{
+			std::string name = piece_name_[i];
+			std::vector<std::shared_ptr<FourierDescriptor>> vec_ptr = chessmans_[i].get_descriptors();
+			for (int j = 0; j < vec_ptr.size(); j++)
+			{
+				if (vec_ptr[j] == nullptr)
+					continue;
+ 				float tmp = vec_ptr[j]->compare_descriptors(fd, ndesc);
+				if (score > tmp)
+				{
+					score = tmp;
+					index = i;
+				}
+			}
+		}
+			return piece_name_[index];
 	}
 
 
@@ -93,7 +120,7 @@ namespace crepe
 					if (filename == "." || filename == "..")
 						continue;
 					std::string fullpath = path + filename;
-					FourierDescriptor fd = get_decriptor(fullpath);
+					std::shared_ptr<FourierDescriptor> fd = get_descriptor(fullpath);
 					chessmans_[i].add_descriptor(fd);
 				} while (FindNextFile(hFind, &data));
 			}

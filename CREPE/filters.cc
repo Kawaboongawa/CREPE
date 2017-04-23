@@ -29,7 +29,7 @@ namespace filter
 	}
 
 
-	void Filter::rgb2grey(cv::cuda::GpuMat&src, cv::cuda::GpuMat& dst)
+	void Filter::rgb2grey(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst)
 	{
 		cv::cuda::cvtColor(src, dst, CV_RGB2GRAY, 1);
 	}

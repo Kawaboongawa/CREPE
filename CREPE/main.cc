@@ -15,10 +15,11 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 	//camera 
-	//cv::VideoCapture capture(0);
+	cv::VideoCapture capture(0);
 
 	//video 
-	cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&king.avi");
+	//cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&king.avi");
+	//cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\full.mp4");
 	if (!capture.isOpened())
 		return 1;
 	unsigned int width = 1280;

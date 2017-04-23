@@ -15,8 +15,9 @@ namespace filter
 	GpuMat FilterHandler::compute_edges(GpuMat& src)
 	{
 		cv::cuda::GpuMat dst;
-		rgb_filter_.rgb2grey(src, dst);
-		rgb_filter_.canny(dst, dst);
+		rgb_filter_.rgb2grey(src, src);
+		rgb_filter_.canny(src, dst);
+
 		return dst;
 	}
 

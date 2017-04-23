@@ -16,7 +16,7 @@ namespace filter
 		void sobel(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst);
 		void canny(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst);
 		void rgb2binary(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst);
-		void rgb2grey(cv::cuda::GpuMat&src, cv::cuda::GpuMat& dst);
+		void rgb2grey(cv::cuda::GpuMat& src, cv::cuda::GpuMat& dst);
 
 	private:
 
