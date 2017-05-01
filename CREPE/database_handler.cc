@@ -20,6 +20,31 @@ namespace crepe
 	Database::~Database()
 	{}
 
+	static std::vector<cv::Point> compute_equal_length_points(const std::vector<cv::Point>& arr, int n)
+	{
+		int size = arr.size();
+		std::vector<cv::Point> dst(n);
+		float point_dist = static_cast<float>(size) / static_cast<float>(n);
+		int index = 0;
+		float sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			dst[i] = arr[static_cast<int>(sum)];
+			sum += point_dist;
+		}
+		return dst;
+	}
+
+	static std::vector<std::vector<cv::Point>> normalize_shapes(const std::vector<std::vector<cv::Point>>& contours)
+	{
+		std::vector<std::vector<cv::Point>> dst;
+		for (int i = 0; i < contours.size(); i++)
+		{
+			if (contours[i].size() > 500)
+				dst.push_back(compute_equal_length_points(contours[i], 256));
+		}
+		return dst;
+	}
 
 	int findMaxIndex(const std::vector<std::vector<cv::Point>>& arr)
 	{
@@ -31,12 +56,11 @@ namespace crepe
 		}
 		return index;
 	}
-	//void Database::get_decriptor(const std::string& path)
+
 	std::shared_ptr<FourierDescriptor> Database::get_descriptor(const std::string& path)
 	{
 
-		std::vector<std::vector<cv::Point>> contours;
-		std::vector<cv::Vec4i> hierarchy;
+		std::vector<std::vector<cv::Point>> sh_contours;
 		cv::Mat src = cv::imread(path);
 		cv::Mat canny;
 		//cv::imshow("original photo", src);
@@ -46,7 +70,8 @@ namespace crepe
 		res.download(canny);
 		//cv::imshow("canny photo", canny);
 		//cv::waitKey(0);
-		cv::findContours(canny, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+		cv::findContours(canny, sh_contours, cv::RETR_TREE, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
+		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		if (contours.empty())
 			return nullptr;
 		int index = findMaxIndex(contours);
@@ -78,7 +103,7 @@ namespace crepe
 			{
 				if (vec_ptr[j] == nullptr)
 					continue;
- 				float tmp = vec_ptr[j]->compare_descriptors(fd, ndesc);
+				float tmp = vec_ptr[j]->compare_descriptors(fd, ndesc);
 				if (score > tmp)
 				{
 					score = tmp;

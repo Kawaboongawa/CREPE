@@ -2,9 +2,11 @@
 
 #include <opencv2/cudaarithm.hpp>
 #include <opencv2/opencv.hpp>
+#include <vector>
 
 #include "filters.hh"
 #include "mycannyfilter.hh"
+#include "edgelinking.cuh"
 
 namespace filter
 {
@@ -17,6 +19,8 @@ namespace filter
 
 		// take a CV_8UC3 matrix and return a CV_8UC1 one with edges contours
 		GpuMat compute_edges(GpuMat& src);
+
+		void fill_edges(GpuMat& src, GpuMat& dst);
 
 	private:
 

@@ -40,17 +40,43 @@ namespace crepe
 		}
 	}
 
+	std::vector<cv::Point> compute_equal_length_points(const std::vector<cv::Point>& arr, int n)
+	{ 
+		int size = arr.size();
+		std::vector<cv::Point> dst(n);
+		float point_dist = static_cast<float>(size) / static_cast<float>(n);
+		int index = 0;
+		float sum = 0;
+		for (int i = 0; i < n; i++)
+		{
+			dst[i] = arr[static_cast<int>(sum)];
+			sum += point_dist;
+		}
+		return dst;
+	}
+
+	std::vector<std::vector<cv::Point>> normalize_shapes(const std::vector<std::vector<cv::Point>>& contours)
+	{
+		std::vector<std::vector<cv::Point>> dst;
+		for (int i = 0; i < contours.size(); i++)
+		{
+			if (contours[i].size() > 500)
+				dst.push_back(compute_equal_length_points(contours[i], 256));
+		}
+		return dst;
+	}
+
 	void Crepe::process(cv::Mat src) 
 	{
-		std::vector<cv::Vec4i> hierarchy;
-		std::vector<std::vector<cv::Point>> contours;
+		std::vector<std::vector<cv::Point>> sh_contours;
 		GpuMat src_device;
 		src_device.upload(src);
 		GpuMat device_canny = filter_.compute_edges(src_device);
 		cv::Mat canny;
 		device_canny.download(canny);
 		cv::imshow("Canny", canny);
-		cv::findContours(canny, contours, hierarchy, cv::RETR_TREE, cv::CHAIN_APPROX_SIMPLE, cv::Point(0, 0));
+		cv::findContours(canny, sh_contours, cv::RETR_TREE, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
+		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		int size = contours.size();
 		std::vector<std::string> names(size);
 		//function that gets contours
@@ -59,15 +85,13 @@ namespace crepe
 		for (int index = 0; index < size; index++)
 		{
 			int edge_size = contours[index].size();
-			if (contours[index].size() < 200)
-				continue;
 			ushort2* edges = (ushort2*) malloc(edge_size * sizeof(ushort2));
 			for (int i = 0; i < edge_size; i++)
 			{
 				edges[i].x = contours[index][i].x;
 				edges[i].y = contours[index][i].y;
 			}
-			//////////////////
+		//////////////////
 			FourierDescriptor fd = FourierDescriptor(edges, contours[index].size());
 			free(edges);
 			fd.compute_descriptors();
@@ -93,10 +117,6 @@ namespace crepe
 		for (int i = 0; i < contours.size(); i++)
 		{
 			cv::approxPolyDP(cv::Mat(contours[i]), contours_poly[i], 3, true);
-			boundRect[i] = cv::boundingRect(cv::Mat(contours_poly[i]));
-			if (contours[i].size() < 200)
-				continue;
-
 			boundRect[i] = cv::boundingRect(cv::Mat(contours_poly[i]));
 			cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
 			drawContours(drawing, contours, i, color, 2, 8, hierarchy, 0, cv::Point());

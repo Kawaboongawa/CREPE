@@ -3,6 +3,7 @@
 * Core class of the Crepe Project  */
 #pragma once
 
+
 #include <string>
 #include <sstream>
 #include <chrono>
@@ -21,6 +22,8 @@
 #include "fourier_descriptor.hh"
 #include "filter_handler.hh"
 #include "database_handler.hh"
+
+
 
 using namespace cv::cuda;
 namespace crepe

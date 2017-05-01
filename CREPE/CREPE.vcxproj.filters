@@ -28,6 +28,9 @@
     <ClCompile Include="fourier_descriptor.cc">
       <Filter>C++ Source Files\Image Processing</Filter>
     </ClCompile>
+    <ClCompile Include="edgelinking.cuh">
+      <Filter>CUDA Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="C++ Header Files">
@@ -98,6 +101,9 @@
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="fourier_descriptor.cu">
+      <Filter>CUDA Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="edgelinking.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
   </ItemGroup>

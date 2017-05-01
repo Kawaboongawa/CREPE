@@ -11,13 +11,21 @@ namespace filter
 	FilterHandler::~FilterHandler()
 	{}
 
+	void FilterHandler::fill_edges(GpuMat& src, GpuMat& dst)
+	{
+		fillGaps_caller(src, dst);
+	}
 
 	GpuMat FilterHandler::compute_edges(GpuMat& src)
 	{
 		cv::cuda::GpuMat dst;
+
+		//Is Gauss useful ?
+		rgb_filter_.gauss(src, src);
+		////////////////////
 		rgb_filter_.rgb2grey(src, src);
 		rgb_filter_.canny(src, dst);
-
+		fill_edges(dst, dst);
 		return dst;
 	}
 

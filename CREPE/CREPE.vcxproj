@@ -186,6 +186,10 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
   <ItemGroup>
     <ClCompile Include="chessman.cc" />
     <ClCompile Include="database_handler.cc" />
+    <CudaCompile Include="edgelinking.cu">
+      <FileType>CppCode</FileType>
+    </CudaCompile>
+    <ClCompile Include="edgelinking.cuh" />
     <ClCompile Include="filters.cc" />
     <ClCompile Include="filter_handler.cc" />
     <ClCompile Include="fourier_descriptor.cc" />

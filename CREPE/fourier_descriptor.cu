@@ -69,19 +69,17 @@ void compute_centroid_signature_caller(
 
 	cufftExecC2C(plan1D, src, dst, CUFFT_FORWARD);
 
-	compute_magnitude_kernel << <blocks, threads, 0, 0 >> > (src, dst, size);
+	compute_magnitude_kernel << <blocks, threads, 0, 0 >> > (dst, dst, size);
 
 	float centroid = 0.f;
 	cudaMemcpy(&centroid, dst, sizeof(float), cudaMemcpyDeviceToHost);
 	compute_centroid_signature_kernel << <blocks, threads, 0, 0 >> >(dst + 1, dst + 1, centroid, size - 1);
-
 }
-
-__device__ float _result = 0;
 
 __global__ void compare_descriptors_kernel(
 	float2* src1,
 	float2* src2,
+    float*  dst,
 	uint    size)
 {
 	uint index = blockIdx.x * blockDim.x + threadIdx.x;
@@ -96,13 +94,14 @@ __global__ void compare_descriptors_kernel(
 
 	__syncthreads();
 
-#pragma unroll
 	if (threadIdx.x == 0)
 	{
-		float res = 0;
-		for (int i = 0; i < 128; i++)
+		float res = 0.f;
+		for (int i = 0; i < MIN(size, 128); i++)
 			res += smem[i];
-		atomicAdd(&_result, sqrt(res));
+		res = sqrt(res);
+		src1[0].y = res;
+		atomicAdd(dst, res);
 	}
 
 }
@@ -112,42 +111,20 @@ float compare_descriptors_caller(
 	float2* src2,
 	uint    size)
 {
-	void* result_ptr;
-	cudaGetSymbolAddress(&result_ptr, _result);
+	
+
 
 	const dim3 block(128);
-	const dim3 grid(std::min(size, 65535u), ((size + 65534u) / 65535u), 1);
+	const dim3 grid(size + 127 / 128);
 
-	compare_descriptors_kernel << <grid, block, 0, 0 >> > (src1 + 1, src2 + 1, size);
+	float* dst;
+	cudaMalloc(&dst, sizeof(float));
+	cudaMemset(dst, 0, sizeof(float));
+	compare_descriptors_kernel << <grid, block, 0, 0 >> > (src1, src2, dst, size);
 
-	float count;
-	cudaMemcpyAsync(&count, result_ptr, sizeof(float), cudaMemcpyDeviceToHost);
-	cudaMemsetAsync(result_ptr, 0, sizeof(float));
+	float res;
+	cudaMemcpy(&res, dst, sizeof(float), cudaMemcpyDeviceToHost);
 
-	//This is a useful example that shows how to debug CUDA without Nsight
-	//very tedious yet better than nothing...
-
-	/*
-	float2* a = (float2*)malloc(300 * sizeof(float2));
-	cudaMemcpy(a, src1, 100 * sizeof(float2), cudaMemcpyDeviceToHost);
-	float2 x0 = a[0];
-	float2 x1 = a[1];
-	float2 x2 = a[2];
-	float2 x3 = a[3];
-	float2 x4 = a[4];
-	float2 x5 = a[5];
-
-	float2* b = (float2*)malloc(300 * sizeof(float2));
-	cudaMemcpy(b, src2, 100 * sizeof(float2), cudaMemcpyDeviceToHost);
-	float2 y0 = b[0];
-	float2 y1 = b[1];
-	float2 y2 = b[2];
-	float2 y3 = b[3];
-	float2 y4 = b[4];
-	float2 y5 = b[5];
-
-	free(a);
-	free(b);
-	*/
-	return count;
+	cudaFree(dst);
+	return res;
 }
