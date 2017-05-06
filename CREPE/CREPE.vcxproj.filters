@@ -31,6 +31,15 @@
     <ClCompile Include="edgelinking.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="setup_window.cc">
+      <Filter>C++ Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_setup_window.cc">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_setup_window.cc">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="C++ Header Files">
@@ -56,6 +65,18 @@
     </Filter>
     <Filter Include="C++ Source Files\Image Processing">
       <UniqueIdentifier>{df5c32fb-6610-4e42-ac6f-0429f5c5a04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Forms">
+      <UniqueIdentifier>{83faa2a5-15ec-44ff-91ae-033f6f8b50a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{a6fa431a-02b0-4ff2-b8cd-a522659ec372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{b49c6765-9279-4422-a1f8-1888ca91c586}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{174862be-6ad4-4be6-9316-80f83cfe8ecc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +113,9 @@
     <ClInclude Include="fourier_descriptor.hh">
       <Filter>C++ Header Files\Image Processing</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_setup_window.h">
+      <Filter>C++ Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu">
@@ -106,5 +130,13 @@
     <CudaCompile Include="edgelinking.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="setup_window.hh">
+      <Filter>C++ Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="setup_window.ui">
+      <Filter>Forms</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

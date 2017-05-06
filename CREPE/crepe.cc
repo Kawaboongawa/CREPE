@@ -3,17 +3,25 @@
 
 namespace crepe
 {
-	Crepe::Crepe(const std::pair<int, int>& screen_size, cv::VideoCapture capture)
+	Crepe::Crepe(const std::pair<int, int>& screen_size)
 		: screen_size_(screen_size)
-		, capture_(capture)
+		, capture_(cv::VideoCapture(0))
 		, filter_(filter::FilterHandler())
 		, database_(Database(filter_))
 	{
-		//camera
-	    fps_ = 20;
+		SetupWindow setup_window;
+		setup_window.show();
+		QEventLoop loop;
+		connect(&setup_window, SIGNAL(close()), &loop, SLOT(quit()));
+		loop.exec();
+		SetupWindow::input_kind kind = setup_window.get_kind();
+		if (kind != SetupWindow::input_kind::CAMERA)
+			capture_ = cv::VideoCapture(setup_window.get_path());
+		if (kind == SetupWindow::input_kind::VIDEO)
+			fps_ = capture_.get(CV_CAP_PROP_FPS);
+		else
+			fps_ = 20;
 
-		//video
-		//fps_ = capture_.get(CV_CAP_PROP_FPS);
 	}
 
 	Crepe::~Crepe()
@@ -21,6 +29,8 @@ namespace crepe
 
 	void Crepe::run()
 	{
+		if (!capture_.isOpened())
+			return;
 		cv::cuda::setDevice(0);
 		int delay = 1000 / fps_;
 		cv::namedWindow("CREPE", CV_WINDOW_NORMAL);
@@ -41,7 +51,7 @@ namespace crepe
 	}
 
 	std::vector<cv::Point> compute_equal_length_points(const std::vector<cv::Point>& arr, int n)
-	{ 
+	{
 		int size = arr.size();
 		std::vector<cv::Point> dst(n);
 		float point_dist = static_cast<float>(size) / static_cast<float>(n);
@@ -66,7 +76,7 @@ namespace crepe
 		return dst;
 	}
 
-	void Crepe::process(cv::Mat src) 
+	void Crepe::process(cv::Mat src)
 	{
 		std::vector<std::vector<cv::Point>> sh_contours;
 		GpuMat src_device;
@@ -85,13 +95,13 @@ namespace crepe
 		for (int index = 0; index < size; index++)
 		{
 			int edge_size = contours[index].size();
-			ushort2* edges = (ushort2*) malloc(edge_size * sizeof(ushort2));
+			ushort2* edges = (ushort2*)malloc(edge_size * sizeof(ushort2));
 			for (int i = 0; i < edge_size; i++)
 			{
 				edges[i].x = contours[index][i].x;
 				edges[i].y = contours[index][i].y;
 			}
-		//////////////////
+			//////////////////
 			FourierDescriptor fd = FourierDescriptor(edges, contours[index].size());
 			free(edges);
 			fd.compute_descriptors();
@@ -101,8 +111,8 @@ namespace crepe
 	}
 
 	void Crepe::draw_contours(
-		cv::Mat src, 
-		std::vector<std::vector<cv::Point> > contours, 
+		cv::Mat src,
+		std::vector<std::vector<cv::Point> > contours,
 		std::vector<std::string> names)
 	{
 		// Draw contours

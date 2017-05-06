@@ -22,6 +22,7 @@
 #include "fourier_descriptor.hh"
 #include "filter_handler.hh"
 #include "database_handler.hh"
+#include "setup_window.hh"
 
 
 
@@ -34,8 +35,7 @@ namespace crepe
 
 	public:
 		Crepe(
-			const std::pair<int, int>& screen_size, 
-			cv::VideoCapture capture);
+			const std::pair<int, int>& screen_size);
 
 		~Crepe();
 

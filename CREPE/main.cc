@@ -11,20 +11,34 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
+/*using namespace cv;
+int main(int argc, char** argv)
+{
+	VideoCapture cap;
+	// open the default camera, use something different from 0 otherwise;
+	// Check VideoCapture documentation.
+	if (!cap.open(0))
+		return 0;
+	for (;;)
+	{
+		Mat frame;
+		cap >> frame;
+		if (frame.empty()) break; // end of video stream
+		imshow("this is you, smile! :)", frame);
+		if (waitKey(10) == 27) break; // stop capturing by pressing ESC 
+	}
+	// the camera will be closed automatically upon exit
+	// cap.close();
+	return 0;
+}*/
+
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	//camera 
-	cv::VideoCapture capture(0);
-
-	//video 
-	//cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&king.avi");
 	//cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\full.mp4");
-	if (!capture.isOpened())
-		return 1;
 	unsigned int width = 1280;
 	unsigned int height = 720;
-	crepe::Crepe crepe(std::make_pair(width, height), capture);
+	crepe::Crepe crepe(std::make_pair(width, height));
 	crepe.start();
 	return a.exec();
 
