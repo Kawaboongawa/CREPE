@@ -25,4 +25,14 @@ void SetupWindow::launch()
 	emit close();
 }
 
+void SetupWindow::browse_path()
+{
+	QString filename = QFileDialog::getOpenFileName(this,
+		tr("Input path"), "C://");
+
+	QLineEdit* roi_output_line_edit = findChild<QLineEdit*>("pathLineEdit");
+	roi_output_line_edit->clear();
+	roi_output_line_edit->insert(filename);
+}
+
 

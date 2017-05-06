@@ -55,7 +55,7 @@
     <string/>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="sizeAdjustPolicy">
     <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
@@ -92,7 +92,7 @@
     <string>Lauch</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="ImageOutputBrowsePushButton">
+  <widget class="QToolButton" name="pathFileButton">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -115,7 +115,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\black_queen&amp;king.avi</string>
+    <string>C:\\Users\\Cyril\\Desktop\\CREPE\\database\\test_base\\bishop001.jpg</string>
    </property>
   </widget>
   <widget class="QLabel" name="ConvoMatrixLabel">
@@ -150,8 +150,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pathFileButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Dialog</receiver>
+   <slot>browse_path()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>162</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>211</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>launch()</slot>
+  <slot>browse_path()</slot>
  </slots>
 </ui>

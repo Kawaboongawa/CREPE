@@ -3,6 +3,7 @@
 #include <QDialog>
 #include <QMessageBox>
 #include <QLineEdit>
+#include <QFileDialog>
 #include <memory>
 
 #include "ui_setup_window.h"
@@ -22,12 +23,14 @@ public:
 		PHOTO
 	};
 
+signals:
+	void close();
+
 
 public slots :
 	void launch();
+	void browse_path();
 
-signals:
-	void close();
 
 public:
 	SetupWindow(QWidget *parent = 0);

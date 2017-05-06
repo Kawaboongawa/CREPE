@@ -8,6 +8,7 @@ namespace crepe
 		, capture_(cv::VideoCapture(0))
 		, filter_(filter::FilterHandler())
 		, database_(Database(filter_))
+		, picture_path_("")
 	{
 		SetupWindow setup_window;
 		setup_window.show();
@@ -15,12 +16,18 @@ namespace crepe
 		connect(&setup_window, SIGNAL(close()), &loop, SLOT(quit()));
 		loop.exec();
 		SetupWindow::input_kind kind = setup_window.get_kind();
-		if (kind != SetupWindow::input_kind::CAMERA)
-			capture_ = cv::VideoCapture(setup_window.get_path());
-		if (kind == SetupWindow::input_kind::VIDEO)
-			fps_ = capture_.get(CV_CAP_PROP_FPS);
-		else
+		if (kind == SetupWindow::input_kind::CAMERA)
 			fps_ = 20;
+		else if (kind == SetupWindow::input_kind::VIDEO)
+		{
+			capture_ = cv::VideoCapture(setup_window.get_path());
+			fps_ = capture_.get(CV_CAP_PROP_FPS);
+		}
+		else
+		{
+			capture_.release();
+			picture_path_ = setup_window.get_path();
+		}
 
 	}
 
@@ -29,12 +36,14 @@ namespace crepe
 
 	void Crepe::run()
 	{
+		cv::namedWindow("CREPE", CV_WINDOW_NORMAL);
+		cv::resizeWindow("CREPE", screen_size_.first, screen_size_.second);
+		if (picture_path_ != "")
+			process_picture(cv::imread(picture_path_));
 		if (!capture_.isOpened())
 			return;
 		cv::cuda::setDevice(0);
 		int delay = 1000 / fps_;
-		cv::namedWindow("CREPE", CV_WINDOW_NORMAL);
-		//cv::resizeWindow("CREPE", screen_size_.first, screen_size_.second);
 		cv::Mat frame;
 		capture_ >> frame;
 		for (;;)
@@ -48,6 +57,13 @@ namespace crepe
 			process(frame); 
 			cv::waitKey(delay);
 		}
+	}
+
+
+	void Crepe::process_picture(cv::Mat src)
+	{
+		process(src);
+		cv::waitKey(0);
 	}
 
 	std::vector<cv::Point> compute_equal_length_points(const std::vector<cv::Point>& arr, int n)

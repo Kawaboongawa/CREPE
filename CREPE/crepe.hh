@@ -48,6 +48,8 @@ namespace crepe
 			std::vector<std::vector<cv::Point> > contours, 
 			std::vector<std::string> names);
 
+		void process_picture(cv::Mat src);
+
 	private:
 
 		cv::VideoCapture capture_;
@@ -59,6 +61,8 @@ namespace crepe
 		filter::FilterHandler filter_;
 
 		Database database_;
+
+		std::string picture_path_;
 
 	};
 }
