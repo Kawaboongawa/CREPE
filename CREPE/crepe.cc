@@ -57,21 +57,24 @@ namespace crepe
 		std::vector<std::vector<cv::Point>> contours;
 		res.download(tmp);
 		
-		cv::Mat dist_8u;
+		cv::Mat dist_8s;
 		std::vector<cv::Vec4i> hierarchy;
 
-		tmp.convertTo(dist_8u, CV_8U);
-		myFindContours(dist_8u, contours);
-		//findContours(dist_8u, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
+		tmp.convertTo(dist_8s, CV_8S);
+
+		//std::cout << dist_8s << std::endl;
+
+		myFindContours(dist_8s, contours);
+		//findContours(dist_8s, contours, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE);
 
 		/// Draw contours
 		for (int i = 0; i< contours.size(); i++)
 		{
 			cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-			drawContours(dist_8u, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
+			drawContours(dist_8s, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
 		}
 
-		return GpuMat(dist_8u);
+		return GpuMat(dist_8s);
 	}
 
 	GpuMat Crepe::compute_edges(GpuMat& src)
@@ -84,6 +87,7 @@ namespace crepe
 
 	void Crepe::init_database()
 	{
+		/*
 		cv::Mat src; 
 		cv::Mat src_gray;
 		cv::Mat kernel = (cv::Mat_<float>(3, 3) <<
@@ -153,6 +157,7 @@ namespace crepe
 		cv::namedWindow("Contours", cv::WINDOW_AUTOSIZE);
 		cv::imshow("Contours", drawing);
 		//cv::waitKey(0);
+		*/
 	}
 
 }
