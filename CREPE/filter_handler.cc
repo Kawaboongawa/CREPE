@@ -25,7 +25,9 @@ namespace filter
 		////////////////////
 		rgb_filter_.rgb2grey(src, src);
 		rgb_filter_.canny(src, dst);
-		fill_edges(dst, dst);
+		c1_filter_.dilate(dst, dst);
+		c1_filter_.edge_thinning(dst, dst, 15);
+		//fill_edges(dst, dst);
 		return dst;
 	}
 
