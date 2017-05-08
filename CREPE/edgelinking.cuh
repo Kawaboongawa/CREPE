@@ -6,6 +6,10 @@
 
 #include "tools.hh"
 
+/*
+**We implement here one pixel gap filling as explained in http://ceng.anadolu.edu.tr/cv/PEL/.
+*/
+
 using namespace cv::cuda;
 
 namespace filter

@@ -4,6 +4,8 @@
 #include <opencv2/opencv.hpp>
 
 #include "filters.cuh"
+#include "edgethinning.cuh"
+#include "zhangsuenthinning.cuh"
 
 using namespace cv::cuda;
 

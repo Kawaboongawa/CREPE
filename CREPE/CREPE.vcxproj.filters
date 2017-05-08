@@ -116,6 +116,12 @@
     <ClInclude Include="GeneratedFiles\ui_setup_window.h">
       <Filter>C++ Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="edgethinning.cuh">
+      <Filter>CUDA Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zhangsuenthinning.cuh">
+      <Filter>CUDA Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="filters.cu">
@@ -128,6 +134,12 @@
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="edgelinking.cu">
+      <Filter>CUDA Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="edgethinning.cu">
+      <Filter>CUDA Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="zhangsuenthinning.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
   </ItemGroup>

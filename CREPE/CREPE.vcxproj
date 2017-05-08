@@ -206,10 +206,12 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     <ClCompile Include="crepe.cc" />
     <ClCompile Include="mycannyfilter.cc" />
     <ClCompile Include="tools.cc" />
+    <CudaCompile Include="zhangsuenthinning.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chessman.hh" />
     <ClInclude Include="database_handler.hh" />
+    <ClInclude Include="edgethinning.cuh" />
     <ClInclude Include="filters.cuh" />
     <ClInclude Include="filters.hh" />
     <ClInclude Include="filter_handler.hh" />
@@ -217,6 +219,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     <ClInclude Include="fourier_descriptor.hh" />
     <ClInclude Include="GeneratedFiles\ui_setup_window.h" />
     <ClInclude Include="mycannyfilter.hh" />
+    <ClInclude Include="zhangsuenthinning.cuh" />
     <CustomBuild Include="setup_window.hh">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\Debug\moc_%(Filename).cc"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cc</Outputs>
@@ -233,6 +236,7 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <CudaCompile Include="edgethinning.cu" />
     <CudaCompile Include="filters.cu" />
     <CudaCompile Include="fourier_descriptor.cu" />
     <CudaCompile Include="mycannyfilter.cu" />

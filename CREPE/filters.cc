@@ -8,7 +8,7 @@ namespace filter
 		, gauss_filter_(createGaussianFilter(type, -1, cv::Size(3, 3), 1.5, 1.5))
 		, sobel_filter_(createSobelFilter(type, -1, 1, 1))
 		, canny_edge_detector_(createCannyEdgeDetector(100, 300))
-		, dilate_filter_(createMorphologyFilter(cv::MORPH_DILATE, CV_8UC1, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(11, 11))))
+		, dilate_filter_(createMorphologyFilter(cv::MORPH_DILATE, CV_8UC1, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(7, 7))))
 		, erode_filter1_(createMorphologyFilter(cv::MORPH_ERODE, CV_8UC1, get_first_structuring_elt()))
 		, erode_filter2_(createMorphologyFilter(cv::MORPH_ERODE, CV_8UC1, get_second_structuring_elt()))
 	{}
@@ -57,21 +57,15 @@ namespace filter
 
 	void Filter::edge_thinning(GpuMat& src, GpuMat& dst, int n)
 	{
-		GpuMat comp;
-		comp.create(src.size(), src.type());
-		for (int i = 0; i < n; i++)
-		{
-			erode_filter1_->apply(src, src);
-			complementary_caller(src, comp);
-			cv::Mat lol;
-			erode_filter2_->apply(comp, comp);
-			get_AND_matrix(src, comp, src);
-			src.download(lol);
-			cv::imshow("yolo", lol);
-			cv::waitKey(0);
-
-		}
-		src.copyTo(dst);
+		zhang_suen_edge_thinning_caller(src, dst);
+		//morphological_edge_thinning_caller(src, dst);
+		for (int i = 1; i < n; i++)
+			zhang_suen_edge_thinning_caller(dst, dst);
+			//morphological_edge_thinning_caller(dst, dst);
+		cv::Mat lol;
+		src.download(lol);
+		cv::imshow("yolo", lol);
+		cv::waitKey(0);
 	}
 
 	void Filter::rgb2grey(GpuMat& src, GpuMat& dst)

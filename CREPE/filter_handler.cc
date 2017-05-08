@@ -25,8 +25,13 @@ namespace filter
 		////////////////////
 		rgb_filter_.rgb2grey(src, src);
 		rgb_filter_.canny(src, dst);
+		cv::Mat lol;
+		dst.download(lol);
+		cv::imshow("canny", lol);
 		c1_filter_.dilate(dst, dst);
-		c1_filter_.edge_thinning(dst, dst, 15);
+		dst.download(lol);
+		cv::imshow("dilated", lol);
+		c1_filter_.edge_thinning(dst, dst, 10);
 		//fill_edges(dst, dst);
 		return dst;
 	}

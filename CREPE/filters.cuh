@@ -16,7 +16,3 @@ void swap_rb_caller(
 	cv::cuda::PtrStep<uchar3> dst);
 
 void remove_b_caller(cv::cuda::PtrStepSz<uchar3> src);
-
-void complementary_caller(PtrStepSzb src, PtrStepb dst);
-
-void get_AND_matrix(PtrStepSzb src1, PtrStepb src2, PtrStepb dst);
