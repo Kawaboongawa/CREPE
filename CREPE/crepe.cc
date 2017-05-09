@@ -86,7 +86,7 @@ namespace crepe
 		std::vector<std::vector<cv::Point>> dst;
 		for (int i = 0; i < contours.size(); i++)
 		{
-			if (contours[i].size() > 256)
+			if (contours[i].size() > 300)
 				dst.push_back(compute_equal_length_points(contours[i], 256));
 		}
 		return dst;

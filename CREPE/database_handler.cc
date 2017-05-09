@@ -40,7 +40,7 @@ namespace crepe
 		std::vector<std::vector<cv::Point>> dst;
 		for (int i = 0; i < contours.size(); i++)
 		{
-			if (contours[i].size() > 500)
+			if (contours[i].size() > 300)
 				dst.push_back(compute_equal_length_points(contours[i], 256));
 		}
 		return dst;
@@ -68,8 +68,8 @@ namespace crepe
 		srcdev.upload(src);
 		GpuMat res = filter_.compute_edges(srcdev);
 		res.download(canny);
-		//cv::imshow("canny photo", canny);
-		//cv::waitKey(0);
+	//	cv::imshow("canny photo", canny);
+	//	cv::waitKey(0);
 		cv::findContours(canny, sh_contours, cv::RETR_TREE, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
 		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		if (contours.empty())

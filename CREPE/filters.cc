@@ -58,14 +58,8 @@ namespace filter
 	void Filter::edge_thinning(GpuMat& src, GpuMat& dst, int n)
 	{
 		zhang_suen_edge_thinning_caller(src, dst);
-		//morphological_edge_thinning_caller(src, dst);
 		for (int i = 1; i < n; i++)
 			zhang_suen_edge_thinning_caller(dst, dst);
-			//morphological_edge_thinning_caller(dst, dst);
-		cv::Mat lol;
-		src.download(lol);
-		cv::imshow("yolo", lol);
-		cv::waitKey(0);
 	}
 
 	void Filter::rgb2grey(GpuMat& src, GpuMat& dst)
