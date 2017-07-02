@@ -142,6 +142,8 @@ namespace crepe
 		std::vector<std::vector<cv::Point> > contours_poly(contours.size());
 		for (int i = 0; i < contours.size(); i++)
 		{
+			if (names[i] == "unknown")
+				continue;
 			cv::approxPolyDP(cv::Mat(contours[i]), contours_poly[i], 3, true);
 			boundRect[i] = cv::boundingRect(cv::Mat(contours_poly[i]));
 			cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));

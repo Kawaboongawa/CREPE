@@ -27,7 +27,7 @@ namespace filter
 		rgb_filter_.canny(src, dst);
 		c1_filter_.dilate(dst, dst);
 		//FIXME: This is UGLY!!! We are suppose to iterate until no change is made between one and another instead of
-		//iterating a fixed amount. Huge perfs gain can be obtained wonking on zhang-suen algorithm.
+		//iterating a fixed amount. Huge perfs gain can be obtained working on zhang-suen algorithm.
 		c1_filter_.edge_thinning(dst, dst, 7);
 		return dst;
 	}
