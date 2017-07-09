@@ -8,7 +8,7 @@ namespace filter
 		, gauss_filter_(createGaussianFilter(type, -1, cv::Size(3, 3), 1.5, 1.5))
 		, sobel_filter_(createSobelFilter(type, -1, 1, 1))
 		, canny_edge_detector_(createCannyEdgeDetector(100, 300))
-		, dilate_filter_(createMorphologyFilter(cv::MORPH_DILATE, CV_8UC1, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(7, 7))))
+		, dilate_filter_(createMorphologyFilter(cv::MORPH_DILATE, CV_8UC1, cv::getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5))))
 		, erode_filter1_(createMorphologyFilter(cv::MORPH_ERODE, CV_8UC1, get_first_structuring_elt()))
 		, erode_filter2_(createMorphologyFilter(cv::MORPH_ERODE, CV_8UC1, get_second_structuring_elt()))
 	{}
