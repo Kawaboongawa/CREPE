@@ -21,7 +21,8 @@ namespace crepe
 		else if (kind == SetupWindow::input_kind::VIDEO)
 		{
 			capture_ = cv::VideoCapture(setup_window.get_path());
-			fps_ = capture_.get(CV_CAP_PROP_FPS);
+			fps_ = 60;//capture_.get(CV_CAP_PROP_FPS);
+
 		}
 		else
 		{
@@ -86,7 +87,7 @@ namespace crepe
 		std::vector<std::vector<cv::Point>> dst;
 		for (int i = 0; i < contours.size(); i++)
 		{
-			if (contours[i].size() > 300)
+			if (contours[i].size() > 256)
 				dst.push_back(compute_equal_length_points(contours[i], 256));
 		}
 		return dst;
@@ -101,7 +102,7 @@ namespace crepe
 		cv::Mat canny;
 		device_canny.download(canny);
 		cv::imshow("Canny", canny);
-		cv::findContours(canny, sh_contours, cv::RETR_TREE, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
+		cv::findContours(canny, sh_contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
 		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		int size = contours.size();
 		std::vector<std::string> names(size);

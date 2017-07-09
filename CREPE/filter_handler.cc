@@ -28,7 +28,8 @@ namespace filter
 		c1_filter_.dilate(dst, dst);
 		//FIXME: This is UGLY!!! We are suppose to iterate until no change is made between one and another instead of
 		//iterating a fixed amount. Huge perfs gain can be obtained working on zhang-suen algorithm.
-		c1_filter_.edge_thinning(dst, dst, 7);
+		c1_filter_.edge_thinning(dst, dst, 6);
+		fillGaps_caller(dst, dst);
 		return dst;
 	}
 
