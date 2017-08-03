@@ -19,8 +19,6 @@ namespace filter
 	GpuMat FilterHandler::compute_edges(GpuMat& src)
 	{
 		cv::cuda::GpuMat dst;
-
-		//Is Gauss useful ?
 		rgb_filter_.gauss(src, src);
 		////////////////////
 		rgb_filter_.rgb2grey(src, src);
@@ -28,7 +26,7 @@ namespace filter
 		c1_filter_.dilate(dst, dst);
 		//FIXME: This is UGLY!!! We are suppose to iterate until no change is made between one and another instead of
 		//iterating a fixed amount. Huge perfs gain can be obtained working on zhang-suen algorithm.
-		//c1_filter_.edge_thinning(dst, dst, 6);
+		c1_filter_.edge_thinning(dst, dst, 6);
 		return dst;
 	}
 

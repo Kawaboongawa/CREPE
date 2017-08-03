@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>271</width>
-    <height>247</height>
+    <width>460</width>
+    <height>366</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,7 +115,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>C:\\Users\\Cyril\\Desktop\\CREPE\\database\\test_base\\bishop001.jpg</string>
+    <string>C:\\Users\\Cyril\\Desktop</string>
    </property>
   </widget>
   <widget class="QLabel" name="ConvoMatrixLabel">

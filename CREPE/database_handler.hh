@@ -3,6 +3,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include <stdio.h>
+#include <algorithm>
 
 #include "chessman.hh"
 #include "filter_handler.hh"

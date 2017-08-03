@@ -106,21 +106,20 @@ namespace crepe
 		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		int size = contours.size();
 		std::vector<std::string> names(size);
-		//function that gets contours
-		//FIXME: THIS IS UGLY and need to be changed
-		//////////////////
+		
+		
 		for (int index = 0; index < size; index++)
 		{
 			int edge_size = contours[index].size();
-			ushort2* edges = (ushort2*)malloc(edge_size * sizeof(ushort2));
+			ushort2* edges = new ushort2[size];
+
 			for (int i = 0; i < edge_size; i++)
 			{
 				edges[i].x = contours[index][i].x;
 				edges[i].y = contours[index][i].y;
 			}
-			//////////////////
 			FourierDescriptor fd = FourierDescriptor(edges, contours[index].size());
-			free(edges);
+			delete[] edges;
 			fd.compute_descriptors();
 			names[index] = database_.match_object(fd, 128);
 		}

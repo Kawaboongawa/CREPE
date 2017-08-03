@@ -67,25 +67,26 @@ namespace crepe
 		srcdev.upload(src);
 		GpuMat res = filter_.compute_edges(srcdev);
 		res.download(canny);
-		//cv::imshow(path, canny);
-		//cv::waitKey(0);
+		cv::imshow(path, canny);
+		cv::waitKey(0);
+	
 		cv::findContours(canny, sh_contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
 		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
 		if (contours.empty())
 			return nullptr;
+		
 		int index = findMaxIndex(contours);
 		int size = contours[index].size();
-		//FIXME: THIS IS UGLY and need to be changed
-		//////////////////
-		ushort2* edges = (ushort2*)malloc(size * sizeof(ushort2));
+
+		ushort2* edges = new ushort2[size];
 		for (int i = 0; i < size; i++)
 		{
 			edges[i].x = contours[index][i].x;
 			edges[i].y = contours[index][i].y;
 		}
-		//////////////////
 		std::shared_ptr<FourierDescriptor> fd = std::make_shared<FourierDescriptor>(edges, size);
-		free(edges);
+		delete[] edges;
+
 		fd->compute_descriptors();
 		return fd;
 	}

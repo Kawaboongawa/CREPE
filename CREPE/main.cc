@@ -14,7 +14,6 @@
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-	//cv::VideoCapture capture("C:\\Users\\Cyril\\Desktop\\chess_video\\chess\\full.mp4");
 	unsigned int width = 640;
 	unsigned int height = 480;
 	crepe::Crepe crepe(std::make_pair(width, height));
