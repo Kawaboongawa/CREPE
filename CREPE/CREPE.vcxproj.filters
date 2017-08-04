@@ -13,9 +13,6 @@
     <ClCompile Include="filters.cc">
       <Filter>C++ Source Files\Image Processing</Filter>
     </ClCompile>
-    <ClCompile Include="mycannyfilter.cc">
-      <Filter>C++ Source Files\Image Processing</Filter>
-    </ClCompile>
     <ClCompile Include="chessman.cc">
       <Filter>C++ Source Files\Database</Filter>
     </ClCompile>
@@ -27,9 +24,6 @@
     </ClCompile>
     <ClCompile Include="fourier_descriptor.cc">
       <Filter>C++ Source Files\Image Processing</Filter>
-    </ClCompile>
-    <ClCompile Include="edgelinking.cuh">
-      <Filter>CUDA Header Files</Filter>
     </ClCompile>
     <ClCompile Include="setup_window.cc">
       <Filter>C++ Source Files</Filter>
@@ -92,12 +86,6 @@
     <ClInclude Include="filters.hh">
       <Filter>C++ Header Files\Image Processing</Filter>
     </ClInclude>
-    <ClInclude Include="mycannyfilter.hh">
-      <Filter>C++ Header Files\Image Processing</Filter>
-    </ClInclude>
-    <ClInclude Include="mycannyfilter.cuh">
-      <Filter>CUDA Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="fourier_descriptor.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
@@ -116,9 +104,6 @@
     <ClInclude Include="GeneratedFiles\ui_setup_window.h">
       <Filter>C++ Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="edgethinning.cuh">
-      <Filter>CUDA Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="zhangsuenthinning.cuh">
       <Filter>CUDA Header Files</Filter>
     </ClInclude>
@@ -127,16 +112,7 @@
     <CudaCompile Include="filters.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
-    <CudaCompile Include="mycannyfilter.cu">
-      <Filter>CUDA Source Files</Filter>
-    </CudaCompile>
     <CudaCompile Include="fourier_descriptor.cu">
-      <Filter>CUDA Source Files</Filter>
-    </CudaCompile>
-    <CudaCompile Include="edgelinking.cu">
-      <Filter>CUDA Source Files</Filter>
-    </CudaCompile>
-    <CudaCompile Include="edgethinning.cu">
       <Filter>CUDA Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="zhangsuenthinning.cu">

@@ -203,30 +203,23 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     </ClCompile>
     <ClCompile Include="setup_window.cc" />
     <ClCompile Include="database_handler.cc" />
-    <CudaCompile Include="edgelinking.cu">
-      <FileType>CppCode</FileType>
-    </CudaCompile>
-    <ClCompile Include="edgelinking.cuh" />
     <ClCompile Include="filters.cc" />
     <ClCompile Include="filter_handler.cc" />
     <ClCompile Include="fourier_descriptor.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="crepe.cc" />
-    <ClCompile Include="mycannyfilter.cc" />
     <ClCompile Include="tools.cc" />
     <CudaCompile Include="zhangsuenthinning.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chessman.hh" />
     <ClInclude Include="database_handler.hh" />
-    <ClInclude Include="edgethinning.cuh" />
     <ClInclude Include="filters.cuh" />
     <ClInclude Include="filters.hh" />
     <ClInclude Include="filter_handler.hh" />
     <ClInclude Include="fourier_descriptor.cuh" />
     <ClInclude Include="fourier_descriptor.hh" />
     <ClInclude Include="GeneratedFiles\ui_setup_window.h" />
-    <ClInclude Include="mycannyfilter.hh" />
     <ClInclude Include="zhangsuenthinning.cuh" />
     <CustomBuild Include="setup_window.hh">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\Debug\moc_%(Filename).cc"</Command>
@@ -244,13 +237,8 @@ copy /Y "$(SolutionDir)\libraries\Qt5.7\dll\Qt5Widgets.dll" "$(TargetDir)"
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="edgethinning.cu" />
     <CudaCompile Include="filters.cu" />
     <CudaCompile Include="fourier_descriptor.cu" />
-    <CudaCompile Include="mycannyfilter.cu" />
-    <ClInclude Include="mycannyfilter.cuh">
-      <FileType>Document</FileType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="setup_window.ui">

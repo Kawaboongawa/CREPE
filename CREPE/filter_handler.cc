@@ -2,30 +2,23 @@
 
 namespace filter
 {
-	FilterHandler::FilterHandler(bool customs_filters)
+	FilterHandler::FilterHandler()
 		: rgb_filter_(Filter(CV_8UC3))
 		, c1_filter_(Filter(CV_8U))
-		, canny_filter_(MyCannyFilter(100, 300))
 	{}
 
 	FilterHandler::~FilterHandler()
 	{}
 
-	void FilterHandler::fill_edges(GpuMat& src, GpuMat& dst)
-	{
-		fillGaps_caller(src, dst);
-	}
-
 	GpuMat FilterHandler::compute_edges(GpuMat& src)
 	{
 		cv::cuda::GpuMat dst;
 		rgb_filter_.gauss(src, src);
-		////////////////////
 		rgb_filter_.rgb2grey(src, src);
 		rgb_filter_.canny(src, dst);
 		c1_filter_.dilate(dst, dst);
-		//FIXME: This is UGLY!!! We are suppose to iterate until no change is made between one and another instead of
-		//iterating a fixed amount. Huge perfs gain can be obtained working on zhang-suen algorithm.
+		//We are suppose to iterate until no change is made between one and another instead of
+		//iterating a fixed amount. More perfs can be obtained looking at this point.
 		c1_filter_.edge_thinning(dst, dst, 6);
 		return dst;
 	}

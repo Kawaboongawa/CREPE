@@ -1,4 +1,4 @@
-#include "edgethinning.cuh"
+#include "zhangsuenthinning.cuh"
 
 namespace filter
 {
