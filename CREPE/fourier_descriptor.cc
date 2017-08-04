@@ -31,10 +31,6 @@ namespace crepe
 		cudaFree(shape_);
 		shape_ = nullptr;
 		compute_centroid_signature_caller(gpu_descriptors_, gpu_descriptors_, size_, plan1d_);
-
-		//example
-		std::vector<float2> a(size_);
-		cudaMemcpy(&a[0], gpu_descriptors_, size_* sizeof(float2), cudaMemcpyDeviceToHost);
 	}
 
 	float FourierDescriptor::compare_descriptors(const FourierDescriptor& desc, uint size)

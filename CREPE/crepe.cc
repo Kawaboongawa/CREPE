@@ -111,7 +111,7 @@ namespace crepe
 		for (int index = 0; index < size; index++)
 		{
 			int edge_size = contours[index].size();
-			ushort2* edges = new ushort2[size];
+			ushort2* edges = new ushort2[edge_size];
 
 			for (int i = 0; i < edge_size; i++)
 			{

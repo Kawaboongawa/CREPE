@@ -23,9 +23,9 @@ namespace filter
 	{
 		__shared__ volatile int smem[18][18];
 
+
 		const int x = blockIdx.x * blockDim.x + threadIdx.x;
 		const int y = blockIdx.y * blockDim.y + threadIdx.y;
-
 
 		smem[threadIdx.y + 1][threadIdx.x + 1] = checkIdx(y, x, src.rows, src.cols) ? src(y, x) : 0;
 		if (threadIdx.y == 0)
@@ -46,14 +46,13 @@ namespace filter
 			smem[blockDim.y + 1][blockDim.x + 1] = checkIdx(y + 1, x + 1, src.rows, src.cols) ? src(y + 1, x + 1) : 0;
 
 		__syncthreads();
-
+		
 		if (x >= src.cols || y >= src.rows)
 			return;
 
 		bool res = true;
 		ushort n = 0;
 		ushort n_transi = 0;
-
 
 		for (int j = -1; j < 2; j++)
 		{
@@ -69,12 +68,11 @@ namespace filter
 		if (n < 2 || n > 6)
 			res = false;
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < 8; i++)
 			n_transi += checkTransition(smem[threadIdx.y + 1 + c_dy[i]][threadIdx.x + 1 + c_dx[i]], smem[threadIdx.y + 1 + c_dy[(i + 1) % 8]][threadIdx.x + 1 + c_dx[(i + 1) % 8]]);
 
 		if (n_transi != 1)
 			res = false;
-
 		if (step == 0)
 		{
 			if (smem[threadIdx.y][threadIdx.x + 1] * smem[threadIdx.y + 1][threadIdx.x + 2] * smem[threadIdx.y + 2][threadIdx.x + 1] != 0 ||
@@ -93,8 +91,6 @@ namespace filter
 
 		if (res == true && smem[threadIdx.y + 1][threadIdx.x + 1] == 255)
 			smem[threadIdx.y + 1][threadIdx.x + 1] = 0;
-
-		__syncthreads();
 
 		dst(y, x) = smem[threadIdx.y + 1][threadIdx.x + 1];
 

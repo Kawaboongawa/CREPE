@@ -67,8 +67,8 @@ namespace crepe
 		srcdev.upload(src);
 		GpuMat res = filter_.compute_edges(srcdev);
 		res.download(canny);
-		cv::imshow(path, canny);
-		cv::waitKey(0);
+		//cv::imshow(path, canny);
+		//cv::waitKey(0);
 	
 		cv::findContours(canny, sh_contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE, cv::Point(0, 0));
 		std::vector<std::vector<cv::Point>> contours = normalize_shapes(sh_contours);
