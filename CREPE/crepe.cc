@@ -21,7 +21,7 @@ namespace crepe
 		else if (kind == SetupWindow::input_kind::VIDEO)
 		{
 			capture_ = cv::VideoCapture(setup_window.get_path());
-			fps_ = 60;//capture_.get(CV_CAP_PROP_FPS);
+			fps_ = capture_.get(CV_CAP_PROP_FPS);
 
 		}
 		else
@@ -55,7 +55,7 @@ namespace crepe
 				capture_.set(CV_CAP_PROP_POS_FRAMES, 0);
 				continue;
 			}
-			process(frame); 
+			process(frame);
 			cv::waitKey(delay);
 		}
 	}
