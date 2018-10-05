@@ -12,20 +12,22 @@ A screenshot of the presentation video
 A second one with 30° angle 
 ![Screenshot](sample/crepe2.png)
 
-## Hardware requirement
+## Requirement
 
-To compile this project you will need Windows 10  (other version might work but this hasn't been tested), and a Nvidia GPU. The requierements
-for the GPU are not very high (It worked well with a 660M). A camera will be needed if you want to try your setup, yet not absolutely necessary as 
-CREPE can aswell read videos. Video formats and cameras supported are the one supported by OpenCV library. 
+This projects has been tested with :
+- Visual studio 2017
+- CMake 3.12.2
+- Cuda 10.0.0 
+- opencv-3.4.3 (with GPU module)
+- Qt5.11.2
 
-## What to do build CREPE
+## Build CREPE
 
-The project was developped on Windows, visual studio 2015. To build the project, you'll need at least CUDA 8.0, OPENCV library compiled with its CUDA functions
-(A very good tutorial for windows can be found following this [link](https://inside.mines.edu/~whoff/courses/EENG510/lectures/other/CompilingOpenCV.pdf)), 
-and Qt 5.7.1.
+You will first need to build OpenCV with its CUDA modules.  (A very good tutorial for windows can be found following this 
+[link](https://inside.mines.edu/~whoff/courses/EENG510/lectures/other/CompilingOpenCV.pdf))
 
-Once this has been done you can open CREPE.sln in the root directory and then build the project in visual studio. You can run the CREPE.exe in 
-/path/to/directory/CREPE/x64/Release. The QT interface is very straightforward and should not give any problem to use. 
+You can then build the project by using CMake and generate the visual studio solution. The project should work for older visual studio and
+opencv version. 
 
 You can test if it is working with the few demo videos in the directory sample . 
 
