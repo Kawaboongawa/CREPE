@@ -12,7 +12,7 @@ A screenshot of the presentation video
 A second one with 30° angle 
 ![Screenshot](sample/crepe2.png)
 
-## Requirement
+## Requirements
 
 This projects has been tested with :
 - Visual studio 2017
