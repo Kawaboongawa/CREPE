@@ -115,7 +115,7 @@ float compare_descriptors_caller(
 
 
 	const dim3 block(128);
-	const dim3 grid(size + 127 / 128);
+	const dim3 grid((size + 127) / 128);
 
 	float* dst;
 	cudaMalloc(&dst, sizeof(float));
